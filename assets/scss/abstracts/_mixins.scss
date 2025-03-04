@@ -1,17 +1,22 @@
- // d-flex prefixes
-@mixin flex() {
-	display: -webkit-box; 
-	display: -moz-box;
-	display: -ms-flexbox;
-	display: -webkit-flex; 
-	display: flex;
+// transition
+@mixin custom-transition($property,$time) {
+    -webkit-transition: $property $time + s;
+    -o-transition: $property $time + s;
+    transition: $property $time + s;
 }
 
-// transition
-@mixin custom-transition($property,$duration) {
-	-webkit-transition: $property $duration + s;
-	-o-transition: $property $duration + s;
-	transition: $property $duration + s
+// display flex
+@mixin d-flex() {
+    display: -webkit-box; 
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex; 
+    display: flex;
 }
- 
- 
+
+// circle 
+@mixin circle($wh) {
+    width: $wh + px;
+    height: $wh + px;
+    border-radius: 50%;
+}

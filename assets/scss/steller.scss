@@ -1,6 +1,6 @@
 /*!
 =========================================================
-* Meyawo Landing page
+* Steller Landing page
 =========================================================
 
 * Copyright: 2019 DevCRUD (https://devcrud.com)
@@ -63,18 +63,16 @@
 
 
 // custom 
-@import "base/base";
 @import "base/typography";
 
-@import "components/breadcrumb"; 
-@import "components/button";
-@import "components/card";
-@import "components/code";
-@import "components/dropdown"; 
-@import "components/hamburger"; 
+@import "components/buttons";
+@import "components/cards";
+@import "components/carousel";
+@import "components/forms";
+@import "components/googlemap";
 @import "components/navbar";
-@import "components/pagination";
+@import "components/progressbar";
 
 @import "layout/footer";
 @import "layout/header";
-@import "layout/sections";
+@import "layout/section";
