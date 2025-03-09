@@ -4012,7 +4012,7 @@ input[type="button"].btn-block {
 }
 
 .custom-control-input:focus ~ .custom-control-label::before {
-  box-shadow: 0 0 0 0.2rem rgba(255, 122, 87, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(57, 162, 219, 0.25);
 }
 
 .custom-control-input:focus:not(:checked) ~ .custom-control-label::before {
@@ -4222,7 +4222,7 @@ input[type="button"].btn-block {
 
 .custom-file-input:focus ~ .custom-file-label {
   border-color: #ffdfd7;
-  box-shadow: 0 0 0 0.2rem rgba(255, 122, 87, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(57, 162, 219, 0.25);
 }
 
 .custom-file-input:disabled ~ .custom-file-label {
@@ -4285,15 +4285,15 @@ input[type="button"].btn-block {
 }
 
 .custom-range:focus::-webkit-slider-thumb {
-  box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(255, 122, 87, 0.25);
+  box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(57, 162, 219, 0.25);
 }
 
 .custom-range:focus::-moz-range-thumb {
-  box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(255, 122, 87, 0.25);
+  box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(57, 162, 219, 0.25);
 }
 
 .custom-range:focus::-ms-thumb {
-  box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(255, 122, 87, 0.25);
+  box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(57, 162, 219, 0.25);
 }
 
 .custom-range::-moz-focus-outer {
@@ -5392,7 +5392,7 @@ input[type="button"].btn-block {
 .page-link:focus {
   z-index: 2;
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(255, 122, 87, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(57, 162, 219, 0.25);
 }
 
 .page-item:first-child .page-link {
@@ -5505,7 +5505,7 @@ a.badge-primary:hover, a.badge-primary:focus {
 
 a.badge-primary:focus, a.badge-primary.focus {
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(255, 122, 87, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(57, 162, 219, 0.5);
 }
 
 .badge-secondary {
@@ -11077,7 +11077,7 @@ pre {
 }
 
 .img-wrapper .overlay {
-  background: rgba(255, 122, 87, 0.7);
+  background: rgba(57, 162, 219, 0.7);
   position: absolute;
   left: 0;
   bottom: 100%;
@@ -11417,7 +11417,7 @@ pre {
   height: 13px;
   border-radius: 50%;
   background: #39A2DB;
-  box-shadow: 0 0 10px rgba(255, 122, 87, 0.5);
+  box-shadow: 0 0 10px rgba(57, 162, 219, 0.5);
 }
 
 .page-footer {
