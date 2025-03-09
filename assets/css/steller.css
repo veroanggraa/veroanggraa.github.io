@@ -2193,7 +2193,7 @@ pre code {
   background-color: #fff;
   border-color: #ffdfd7;
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(255, 122, 87, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(57, 162, 219, 0.25);
 }
 
 .form-control::-webkit-input-placeholder {
@@ -2510,7 +2510,7 @@ textarea.form-control {
   font-size: 0.875rem;
   line-height: 1.5;
   color: #fff;
-  background-color: rgba(248, 92, 112, 0.9);
+  background-color: rgba(57, 162, 219, 0.9);
   border-radius: 0.25rem;
 }
 
@@ -2525,7 +2525,7 @@ textarea.form-control {
 
 .was-validated .form-control:invalid:focus, .form-control.is-invalid:focus {
   border-color: #F85C70;
-  box-shadow: 0 0 0 0.2rem rgba(248, 92, 112, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(57, 162, 219, 0.25);
 }
 
 .was-validated .form-control:invalid ~ .invalid-feedback,
@@ -2592,7 +2592,7 @@ textarea.form-control {
 }
 
 .was-validated .custom-control-input:invalid:focus ~ .custom-control-label::before, .custom-control-input.is-invalid:focus ~ .custom-control-label::before {
-  box-shadow: 0 0 0 0.2rem rgba(248, 92, 112, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(57, 162, 219, 0.25);
 }
 
 .was-validated .custom-control-input:invalid:focus:not(:checked) ~ .custom-control-label::before, .custom-control-input.is-invalid:focus:not(:checked) ~ .custom-control-label::before {
@@ -2611,7 +2611,7 @@ textarea.form-control {
 
 .was-validated .custom-file-input:invalid:focus ~ .custom-file-label, .custom-file-input.is-invalid:focus ~ .custom-file-label {
   border-color: #F85C70;
-  box-shadow: 0 0 0 0.2rem rgba(248, 92, 112, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(57, 162, 219, 0.25);
 }
 
 .form-inline {
@@ -2756,7 +2756,7 @@ textarea.form-control {
 
 .btn:focus, .btn.focus {
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(255, 122, 87, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(57, 162, 219, 0.25);
 }
 
 .btn.disabled, .btn:disabled {
@@ -2781,7 +2781,7 @@ fieldset:disabled a.btn {
 }
 
 .btn-primary:focus, .btn-primary.focus {
-  box-shadow: 0 0 0 0.2rem rgba(222, 109, 80, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(57, 162, 219, 0.5);
 }
 
 .btn-primary.disabled, .btn-primary:disabled {
@@ -2799,7 +2799,7 @@ fieldset:disabled a.btn {
 
 .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
 .show > .btn-primary.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.2rem rgba(222, 109, 80, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(57, 162, 219, 0.5);
 }
 
 .btn-secondary {
@@ -2951,7 +2951,7 @@ fieldset:disabled a.btn {
 }
 
 .btn-danger:focus, .btn-danger.focus {
-  box-shadow: 0 0 0 0.2rem rgba(249, 116, 133, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(57, 162, 219, 0.5);
 }
 
 .btn-danger.disabled, .btn-danger:disabled {
@@ -2969,7 +2969,7 @@ fieldset:disabled a.btn {
 
 .btn-danger:not(:disabled):not(.disabled):active:focus, .btn-danger:not(:disabled):not(.disabled).active:focus,
 .show > .btn-danger.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.2rem rgba(249, 116, 133, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(57, 162, 219, 0.5);
 }
 
 .btn-light {
@@ -3052,7 +3052,7 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-primary:focus, .btn-outline-primary.focus {
-  box-shadow: 0 0 0 0.2rem rgba(255, 122, 87, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(57, 162, 219, 0.5);
 }
 
 .btn-outline-primary.disabled, .btn-outline-primary:disabled {
@@ -3069,7 +3069,7 @@ fieldset:disabled a.btn {
 
 .btn-outline-primary:not(:disabled):not(.disabled):active:focus, .btn-outline-primary:not(:disabled):not(.disabled).active:focus,
 .show > .btn-outline-primary.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.2rem rgba(255, 122, 87, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(57, 162, 219, 0.5);
 }
 
 .btn-outline-secondary {
@@ -3212,7 +3212,7 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-danger:focus, .btn-outline-danger.focus {
-  box-shadow: 0 0 0 0.2rem rgba(248, 92, 112, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(57, 162, 219, 0.5);
 }
 
 .btn-outline-danger.disabled, .btn-outline-danger:disabled {
@@ -3229,7 +3229,7 @@ fieldset:disabled a.btn {
 
 .btn-outline-danger:not(:disabled):not(.disabled):active:focus, .btn-outline-danger:not(:disabled):not(.disabled).active:focus,
 .show > .btn-outline-danger.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.2rem rgba(248, 92, 112, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(57, 162, 219, 0.5);
 }
 
 .btn-outline-light {
@@ -4081,11 +4081,11 @@ input[type="button"].btn-block {
 }
 
 .custom-checkbox .custom-control-input:disabled:checked ~ .custom-control-label::before {
-  background-color: rgba(255, 122, 87, 0.5);
+  background-color: rgba(57, 162, 219, 0.5);
 }
 
 .custom-checkbox .custom-control-input:disabled:indeterminate ~ .custom-control-label::before {
-  background-color: rgba(255, 122, 87, 0.5);
+  background-color: rgba(57, 162, 219, 0.5);
 }
 
 .custom-radio .custom-control-label::before {
@@ -4097,7 +4097,7 @@ input[type="button"].btn-block {
 }
 
 .custom-radio .custom-control-input:disabled:checked ~ .custom-control-label::before {
-  background-color: rgba(255, 122, 87, 0.5);
+  background-color: rgba(57, 162, 219, 0.5);
 }
 
 .custom-switch {
@@ -4139,7 +4139,7 @@ input[type="button"].btn-block {
 }
 
 .custom-switch .custom-control-input:disabled:checked ~ .custom-control-label::before {
-  background-color: rgba(255, 122, 87, 0.5);
+  background-color: rgba(57, 162, 219, 0.5);
 }
 
 .custom-select {
@@ -4164,7 +4164,7 @@ input[type="button"].btn-block {
 .custom-select:focus {
   border-color: #ffdfd7;
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(255, 122, 87, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(57, 162, 219, 0.25);
 }
 
 .custom-select:focus::-ms-value {
