@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "title": "Building Scalable Android Applications with Clean Architecture",
+    "category": "Android Development",
+    "excerpt": "Learn how to structure your Android applications using Clean Architecture principles for better maintainability, testability, and scalability.",
+    "snippet": "class MainActivity : AppCompatActivity() {\n    private val viewModel: MainViewModel by viewModels()\n    \n    override fun onCreate(savedInstanceState: Bundle?) {\n        super.onCreate(savedInstanceState)\n        setContentView(R.layout.activity_main)\n        setupObservers()\n    }\n}",
+    "date": "2024-05-10",
+    "link": "https://medium.com/@veronanggraini/building-scalable-android-applications-with-clean-architecture",
+    "readTime": "8 min read"
+  },
+  {
+    "id": 2,
+    "title": "My Journey as a Google Developer Expert: Impact on Community",
+    "category": "GDE Insights",
+    "excerpt": "Sharing my personal experience of becoming a Google Developer Expert and how it has transformed my career and enabled me to empower the Southeast Asian developer community.",
+    "snippet": "fun shareKnowledge(): Impact {\n    return community * contributions * workshops\n}\n\n// Impact = Community + Contributions + Workshops\nval impact = shareKnowledge()",
+    "date": "2024-04-15",
+    "link": "https://medium.com/@veronanggraini/my-journey-as-a-google-developer-expert",
+    "readTime": "12 min read"
+  },
+  {
+    "id": 3,
+    "title": "Getting Started with Spatial UI Development for XR Platforms",
+    "category": "Spatial Computing",
+    "excerpt": "An introduction to spatial UI development for VR/AR platforms, focusing on Meta XR SDK and Jetpack Compose for XR. Learn best practices for immersive interfaces.",
+    "snippet": "@Composable\nfun SpatialDashboard() {\n    Column {\n        ImmersiveContent {\n            ObjectDetection()\n            RealtimeAnalytics()\n        }\n    }\n}",
+    "date": "2024-03-20",
+    "link": "https://medium.com/@veronanggraini/getting-started-with-spatial-ui-development",
+    "readTime": "10 min read"
+  },
+  {
+    "id": 4,
+    "title": "Implementing MLKit for Real-Time Object Detection in Android",
+    "category": "Machine Learning",
+    "excerpt": "Step-by-step guide to integrating Google MLKit into Android applications for real-time object detection, with practical examples and performance optimization tips.",
+    "snippet": "val detector = ObjectDetection.getClient(options)\n\ndetector.process(image)\n    .addOnSuccessListener { results ->\n        processDetectionResults(results)\n    }\n    .addOnFailureListener { e ->\n        Log.e(TAG, \"Detection failed\", e)\n    }",
+    "date": "2024-02-28",
+    "link": "https://medium.com/@veronanggraini/implementing-mlkit-object-detection",
+    "readTime": "15 min read"
+  },
+  {
+    "id": 5,
+    "title": "Building Cross-Platform Apps with Flutter: Lessons Learned",
+    "category": "Flutter Development",
+    "excerpt": "Key insights and best practices from developing Flutter applications, covering state management, testing, and deployment strategies for production apps.",
+    "snippet": "class MyWidget extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return BlocBuilder<Cubit, State>(\n      builder: (context, state) {\n        return Text(state.value);\n      },\n    );\n  }\n}",
+    "date": "2024-01-15",
+    "link": "https://medium.com/@veronanggraini/building-cross-platform-apps-with-flutter",
+    "readTime": "9 min read"
+  },
+  {
+    "id": 6,
+    "title": "Building Inclusive Mobile Applications: Accessibility Best Practices",
+    "category": "Accessibility",
+    "excerpt": "A comprehensive guide to creating accessible mobile applications that work for everyone, including screen reader support, touch targets, and inclusive design principles.",
+    "snippet": "// Accessibility best practices\ncontentDescription = \"Upload profile picture\"\nminTouchTargetSize = 48.dp\nisScreenReaderFriendly = true\nsupportsDynamicType = true",
+    "date": "2024-01-08",
+    "link": "https://medium.com/@veronanggraini/building-inclusive-mobile-applications",
+    "readTime": "11 min read"
+  },
+  {
+    "id": 7,
+    "title": "Optimizing Android App Performance: A Practical Guide",
+    "category": "Performance",
+    "excerpt": "Deep dive into Android app performance optimization, covering memory management, network efficiency, UI rendering, and battery consumption optimization techniques.",
+    "snippet": "// Performance optimization tips\n@Composable\nfun OptimizedList(items: List<Item>) {\n    LazyColumn {\n        items(items, key = { it.id }) { item ->\n            ItemView(item)\n        }\n    }\n}",
+    "date": "2023-12-10",
+    "link": "https://medium.com/@veronanggraini/optimizing-android-app-performance",
+    "readTime": "14 min read"
+  },
+  {
+    "id": 8,
+    "title": "Teaching Android Development: Curriculum Design and Strategies",
+    "category": "Education",
+    "excerpt": "Reflections on designing and teaching Android development curricula, from beginner to advanced levels, with insights on student engagement and learning outcomes.",
+    "snippet": "class AndroidCurriculum {\n    val modules = listOf(\n        Module(\"Fundamentals\"),\n        Module(\"Architecture\"),\n        Module(\"Advanced Topics\")\n    )\n}",
+    "date": "2023-11-20",
+    "link": "https://medium.com/@veronanggraini/teaching-android-development-curriculum-design",
+    "readTime": "13 min read"
+  }
+]

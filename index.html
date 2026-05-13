@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0d1117">
+    <title>Veronica Putri Anggraini | Software Engineer Android & GDE</title>
+
+    <!-- Anti-Flash Script for Theme -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            }
+        })();
+    </script>
+    <meta name="description" content="Personal website of Veronica Putri Anggraini - Software Engineer Android and Google Developer Expert. Building impactful Android experiences and empowering the Southeast Asian developer community.">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Terminal Navigation -->
+    <nav class="terminal-nav">
+        <div class="terminal-header">
+            <span class="terminal-title">veronica@dev:~$</span>
+            <div class="terminal-controls">
+                <span class="control-btn close"></span>
+                <span class="control-btn minimize"></span>
+                <span class="control-btn maximize"></span>
+            </div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#about" data-command="cd about">about/</a></li>
+            <li><a href="#skills" data-command="cd skills">skills/</a></li>
+            <li><a href="#experience" data-command="cd experience">experience/</a></li>
+            <li><a href="#portfolio" data-command="cd portfolio">portfolio/</a></li>
+            <li><a href="#blog" data-command="cd blog">blog/</a></li>
+            <li><a href="#contact" data-command="cd contact">contact/</a></li>
+        </ul>
+        <button class="mobile-menu-btn" aria-label="Toggle menu">
+            <span class="menu-icon">></span>
+        </button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <span class="terminal-title">veronica@dev:~$ ./welcome.sh</span>
+                <div class="terminal-controls">
+                    <span class="control-btn close"></span>
+                    <span class="control-btn minimize"></span>
+                    <span class="control-btn maximize"></span>
+                </div>
+            </div>
+            <div class="terminal-content">
+                <div class="ascii-art">
+<pre>
+  ██████╗  █████╗ ██╗   ██╗ ██████╗  ██████╗
+ ██╔════╝ ██╔══██╗██║   ██║██╔════╝ ██╔═══██╗
+ ██║  ███╗███████║██║   ██║██║  ███╗██║   ██║
+ ██║   ██║██╔══██║██║   ██║██║   ██║██║   ██║
+ ╚██████╔╝██║  ██║╚██████╔╝╚██████╔╝╚██████╔╝
+  ╚═════╝ ╚═╝  ╚═╝ ╚═════╝  ╚═════╝  ╚═════╝
+</pre>
+                </div>
+                <h1 class="typing-effect" data-text="Veronica Putri Anggraini"></h1>
+                <p class="subtitle typing-effect" data-text="Software Engineer Android & Google Developer Expert"></p>
+                <p class="tagline">Building impactful Android experiences and empowering the Southeast Asian developer community</p>
+                <div class="cta-buttons">
+                    <a href="#portfolio" class="terminal-btn primary">
+                        <span class="btn-cmd">$ ./view-projects.sh</span>
+                        <span class="btn-text">View Projects</span>
+                    </a>
+                    <a href="#contact" class="terminal-btn secondary">
+                        <span class="btn-cmd">$ ./contact-me.sh</span>
+                        <span class="btn-text">Contact Me</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <span class="terminal-title">veronica@dev:~/about$ cat README.md</span>
+                <div class="terminal-controls">
+                    <span class="control-btn close"></span>
+                    <span class="control-btn minimize"></span>
+                    <span class="control-btn maximize"></span>
+                </div>
+            </div>
+            <div class="terminal-content">
+                <div class="about-content">
+                    <h2>// About Me</h2>
+                    <div class="code-block">
+                        <pre><code class="language-bash">
+const developer = {
+  name: "Veronica Putri Anggraini",
+  role: "Software Engineer Android",
+  title: "Google Developer Expert",
+  experience: "7+ years",
+  location: "Jakarta, Indonesia",
+  mission: "Empowering the Southeast Asian developer community"
+};
+
+function buildImpact() {
+  return developer.skills
+    .map(skill => skill.apply())
+    .reduce((impact, contribution) => impact + contribution, 0);
+}
+                        </code></pre>
+                    </div>
+                    <p>
+                        Design, develop, and deploy high-impact Android applications with 7+ years of experience.
+                        I have successfully led the development of critical features, ensuring seamless functionality
+                        and high user satisfaction. By collaborating with cross-functional teams, I drive product
+                        success and achieve key business objectives.
+                    </p>
+                    <p>
+                        Beyond my core role, I am deeply committed to knowledge sharing within the Southeast Asian
+                        developer community. As a Google Developer Expert, I host workshops and present at conferences
+                        to make Android technology more accessible, ultimately strengthening the region's tech ecosystem.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills-section" id="skills">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <span class="terminal-title">veronica@dev:~/skills$ ./skills-list.sh</span>
+                <div class="terminal-controls">
+                    <span class="control-btn close"></span>
+                    <span class="control-btn minimize"></span>
+                    <span class="control-btn maximize"></span>
+                </div>
+            </div>
+            <div class="terminal-content">
+                <h2>// Technical Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>📱 Mobile Development</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Android SDK</span>
+                            <span class="skill-tag">Jetpack Compose</span>
+                            <span class="skill-tag">Kotlin</span>
+                            <span class="skill-tag">Java</span>
+                            <span class="skill-tag">Flutter</span>
+                            <span class="skill-tag">Dart</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>🏗️ Architecture</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">MVVM</span>
+                            <span class="skill-tag">MVI</span>
+                            <span class="skill-tag">Clean Architecture</span>
+                            <span class="skill-tag">Multimodule</span>
+                            <span class="skill-tag">KMM</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>🥽 Spatial/AR</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Meta XR SDK</span>
+                            <span class="skill-tag">Jetpack Compose for XR</span>
+                            <span class="skill-tag">3D Rendering Optimization</span>
+                            <span class="skill-tag">Spatial UI/UX</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>🔧 Backend & Database</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Firebase</span>
+                            <span class="skill-tag">Room</span>
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">Retrofit</span>
+                            <span class="skill-tag">Coroutines</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>🤖 ML/AI</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">MLKit</span>
+                            <span class="skill-tag">MediaPipe</span>
+                            <span class="skill-tag">Personalized RAG</span>
+                            <span class="skill-tag">AGSL</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>🧪 Testing</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">JUnit</span>
+                            <span class="skill-tag">Mockito</span>
+                            <span class="skill-tag">Espresso</span>
+                            <span class="skill-tag">Media3</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>🚀 DevOps & Tools</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Jenkins</span>
+                            <span class="skill-tag">GitX</span>
+                            <span class="skill-tag">Subversion (SVN)</span>
+                            <span class="skill-tag">Dagger2</span>
+                            <span class="skill-tag">Hilt</span>
+                            <span class="skill-tag">Koin</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience-section" id="experience">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <span class="terminal-title">veronica@dev:~/experience$ ls -la</span>
+                <div class="terminal-controls">
+                    <span class="control-btn close"></span>
+                    <span class="control-btn minimize"></span>
+                    <span class="control-btn maximize"></span>
+                </div>
+            </div>
+            <div class="terminal-content">
+                <h2>// Work Experience</h2>
+                <div class="experience-timeline">
+                    <div class="experience-item current">
+                        <div class="experience-header">
+                            <h3>eWIDEPLUS Corp.</h3>
+                            <span class="experience-role">Android Engineer</span>
+                            <span class="experience-date">2021 - Present</span>
+                        </div>
+                        <div class="experience-content">
+                            <div class="project">
+                                <h4>LINE Bank by Hana Bank (Digital Banking)</h4>
+                                <ul>
+                                    <li>Scaled user acquisition to <span class="highlight">1M+ downloads</span> through architectural design of core features</li>
+                                    <li>Boosted transaction volume by <span class="highlight">12%</span> with geofencing promotional campaigns</li>
+                                    <li>Accelerated issue resolution time by <span class="highlight">30%</span> for millions of users</li>
+                                    <li>Designed internal eKYC SDK with on-device ML for <span class="highlight">1M+ automated recognition</span></li>
+                                    <li>Architected Robo Advisor engine and secure portfolio management system</li>
+                                    <li>Developed bulk onboarding system for thousands of corporate employees</li>
+                                </ul>
+                            </div>
+                            <div class="project">
+                                <h4>Orka (AI Spatial Assistant)</h4>
+                                <p>For Vision Pro and Meta Quest - AI assistant integrating Personalized RAG for real-time website insights and AI-driven object detection, delivering dynamic 360° immersive dashboard.</p>
+                            </div>
+                            <div class="project">
+                                <h4>AAC and Immersive Communication Tools</h4>
+                                <ul>
+                                    <li>Developed responsive Flutter-based AAC application for education and accessibility</li>
+                                    <li>Improved communication efficiency by <span class="highlight">30%</span> for non-verbal users</li>
+                                    <li>Implemented scalable statistics dashboard with auto-scrolling graph layouts</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-header">
+                            <h3>PT Elektronik Distribusi Otomasi Terkemuka (eDOT)</h3>
+                            <span class="experience-role">Technology Consultant (Contract)</span>
+                            <span class="experience-date">January - May 2026</span>
+                        </div>
+                        <div class="experience-content">
+                            <ul>
+                                <li>Increased unit test coverage from <span class="highlight">52% to 98%</span></li>
+                                <li>Architected Join Vision feature using Clean Architecture</li>
+                                <li>Enabled seamless offline-to-online transitions</li>
+                                <li>Developed robust store-and-forward synchronization system</li>
+                                <li>Created dynamic Leaderboard feature for eWork and eMing SFA applications</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-header">
+                            <h3>PT Integra Data Nusantara</h3>
+                            <span class="experience-role">Android and Flutter Trainer</span>
+                            <span class="experience-date">2018 - 2021</span>
+                        </div>
+                        <div class="experience-content">
+                            <ul>
+                                <li>Achieved <span class="highlight">38% increase</span> in student registrations with 100% enrollment rates</li>
+                                <li>Designed and implemented 3 comprehensive curricula (Beginner, Intermediate, Advanced)</li>
+                                <li>Authored 2 technical books covering Android and Flutter development</li>
+                                <li>Maintained <span class="highlight">82% average</span> student satisfaction rate</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-header">
+                            <h3>PT Dcoding Indonesia</h3>
+                            <span class="experience-role">Flutter External Code Reviewer (Part Time)</span>
+                            <span class="experience-date">2019 - 2021</span>
+                        </div>
+                        <div class="experience-content">
+                            <ul>
+                                <li>Evaluated <span class="highlight">1,500+ student projects</span> with comprehensive code reviews</li>
+                                <li>Consistently earned 5-star student ratings for feedback quality</li>
+                                <li>Optimized code readability and eliminated boilerplate code</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-header">
+                            <h3>PT Can Creative</h3>
+                            <span class="experience-role">Junior Android Developer Intern</span>
+                            <span class="experience-date">2017 - 2018</span>
+                        </div>
+                        <div class="experience-content">
+                            <ul>
+                                <li>Extended internship by 3 months through exceptional performance</li>
+                                <li>Delivered Palm Oil price monitoring application</li>
+                                <li>Achieved <span class="highlight">9.8/10 client satisfaction</span> rating</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="education-section" id="education">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <span class="terminal-title">veronica@dev:~/education$ cat education.txt</span>
+                <div class="terminal-controls">
+                    <span class="control-btn close"></span>
+                    <span class="control-btn minimize"></span>
+                    <span class="control-btn maximize"></span>
+                </div>
+            </div>
+            <div class="terminal-content">
+                <h2>// Education</h2>
+                <div class="education-list">
+                    <div class="education-item">
+                        <h3>Semarang State of Polytechnic</h3>
+                        <p class="degree">Associate Degree of Informatic Engineering</p>
+                        <p class="location">Semarang, Indonesia | 2015 - 2018</p>
+                    </div>
+                    <div class="education-item">
+                        <h3>SMK N 1 Rembang</h3>
+                        <p class="degree">Computer and Network Engineering</p>
+                        <p class="location">Rembang, Indonesia | 2012 - 2015</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio-section" id="portfolio">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <span class="terminal-title">veronica@dev:~/portfolio$ ./showcase.sh</span>
+                <div class="terminal-controls">
+                    <span class="control-btn close"></span>
+                    <span class="control-btn minimize"></span>
+                    <span class="control-btn maximize"></span>
+                </div>
+            </div>
+            <div class="terminal-content">
+                <h2>// Portfolio Showcase</h2>
+                <div class="portfolio-grid" id="portfolio-grid">
+                    <!-- Portfolio items will be dynamically loaded from projects.json -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog-section" id="blog">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <span class="terminal-title">veronica@dev:~/blog$ ./latest-articles.sh</span>
+                <div class="terminal-controls">
+                    <span class="control-btn close"></span>
+                    <span class="control-btn minimize"></span>
+                    <span class="control-btn maximize"></span>
+                </div>
+            </div>
+            <div class="terminal-content">
+                <h2>// Latest Articles</h2>
+                <div class="blog-grid" id="blog-grid">
+                    <!-- Blog articles will be dynamically loaded from blog-articles.json -->
+                </div>
+                <div class="blog-cta">
+                    <a href="https://medium.com/@veronanggraini" target="_blank" rel="noopener noreferrer" class="terminal-btn">
+                        <span class="btn-cmd">$ ./medium.sh</span>
+                        <span class="btn-text">Read All Articles on Medium</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <span class="terminal-title">veronica@dev:~/contact$ ./send-message.sh</span>
+                <div class="terminal-controls">
+                    <span class="control-btn close"></span>
+                    <span class="control-btn minimize"></span>
+                    <span class="control-btn maximize"></span>
+                </div>
+            </div>
+            <div class="terminal-content">
+                <h2>// Get In Touch</h2>
+                <div class="contact-container">
+                    <div class="contact-form">
+                        <form id="contact-form">
+                            <div class="form-group">
+                                <label for="name">Enter your name:</label>
+                                <div class="input-wrapper">
+                                    <span class="prompt">> </span>
+                                    <input type="text" id="name" name="name" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Enter your email:</label>
+                                <div class="input-wrapper">
+                                    <span class="prompt">> </span>
+                                    <input type="email" id="email" name="email" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject:</label>
+                                <div class="input-wrapper">
+                                    <span class="prompt">> </span>
+                                    <input type="text" id="subject" name="subject" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Your message:</label>
+                                <div class="textarea-wrapper">
+                                    <span class="prompt">> </span>
+                                    <textarea id="message" name="message" rows="6" required></textarea>
+                                </div>
+                            </div>
+                            <button type="submit" class="terminal-btn primary">
+                                <span class="btn-cmd">$ ./send.sh</span>
+                                <span class="btn-text">Send Message</span>
+                            </button>
+                        </form>
+                        <div class="form-notice">
+                            <p class="notice-text">
+                                <span class="notice-icon">⚠</span>
+                                Note: Contact form requires backend integration. For direct communication,
+                                <a href="mailto:veronicaputri497@gmail.com">email me directly</a>.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <h3>// Direct Contact</h3>
+                        <div class="contact-links">
+                            <a href="mailto:veronicaputri497@gmail.com" class="contact-link">
+                                <span class="contact-icon">📧</span>
+                                <div class="contact-details">
+                                    <span class="contact-label">Email</span>
+                                    <span class="contact-value">veronicaputri497@gmail.com</span>
+                                </div>
+                            </a>
+                            <a href="tel:+6281281462016" class="contact-link">
+                                <span class="contact-icon">📱</span>
+                                <div class="contact-details">
+                                    <span class="contact-label">Phone</span>
+                                    <span class="contact-value">(+62)81281462016</span>
+                                </div>
+                            </a>
+                            <a href="https://linkedin.com/in/veronanggraini" target="_blank" rel="noopener noreferrer" class="contact-link">
+                                <span class="contact-icon">💼</span>
+                                <div class="contact-details">
+                                    <span class="contact-label">LinkedIn</span>
+                                    <span class="contact-value">linkedin.com/in/veronanggraini</span>
+                                </div>
+                            </a>
+                            <a href="https://medium.com/@veronanggraini" target="_blank" rel="noopener noreferrer" class="contact-link">
+                                <span class="contact-icon">✍️</span>
+                                <div class="contact-details">
+                                    <span class="contact-label">Medium</span>
+                                    <span class="contact-value">medium.com/@veronanggraini</span>
+                                </div>
+                            </a>
+                            <a href="https://veronanggraini.github.io" target="_blank" rel="noopener noreferrer" class="contact-link">
+                                <span class="contact-icon">🌐</span>
+                                <div class="contact-details">
+                                    <span class="contact-label">GitHub</span>
+                                    <span class="contact-value">veronanggraini.github.io</span>
+                                </div>
+                            </a>
+                            <div class="contact-location">
+                                <span class="contact-icon">📍</span>
+                                <div class="contact-details">
+                                    <span class="contact-label">Location</span>
+                                    <span class="contact-value">Jakarta, Indonesia</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="terminal-footer">
+            <div class="terminal-prompt">
+                <span class="prompt-user">veronica@dev</span>
+                <span class="prompt-separator">:</span>
+                <span class="prompt-path">~</span>
+                <span class="prompt-symbol">$</span>
+            </div>
+            <p class="footer-text">Built with ❤️ by Veronica Putri Anggraini | Google Developer Expert for Android</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" aria-label="Toggle theme" title="Switch between light and dark mode">
+        <span class="theme-icon">🌙</span>
+    </button>
+</body>
+</html>

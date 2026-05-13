@@ -1,0 +1,544 @@
+/* ============================================
+   Responsive Design - Mobile First Approach
+   ============================================ */
+
+/* ============================================
+   Mobile Styles (320px - 767px)
+   ============================================ */
+
+@media (max-width: 767px) {
+    /* Typography Scaling */
+    :root {
+        --font-size-4xl: 1.75rem;
+        --font-size-3xl: 1.5rem;
+        --font-size-2xl: 1.25rem;
+        --font-size-xl: 1.125rem;
+        --font-size-lg: 1rem;
+    }
+
+    /* Navigation */
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--bg-primary);
+        flex-direction: column;
+        padding: var(--space-md);
+        border-bottom: 1px solid var(--terminal-border);
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links li {
+        margin-bottom: var(--space-xs);
+    }
+
+    .mobile-menu-btn {
+        display: block;
+        font-size: var(--font-size-2xl);
+        padding: var(--space-sm);
+    }
+
+    .mobile-menu-btn.active .menu-icon {
+        transform: rotate(90deg);
+    }
+
+    /* Hero Section */
+    .hero-section {
+        padding: var(--space-xl) var(--space-md);
+        min-height: auto;
+    }
+
+    .hero-section .terminal-window {
+        margin: 0;
+    }
+
+    .ascii-art pre {
+        font-size: 8px;
+        line-height: 1;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+        gap: var(--space-md);
+    }
+
+    .terminal-btn {
+        width: 100%;
+    }
+
+    /* Sections */
+    section {
+        padding: var(--space-xl) var(--space-md);
+    }
+
+    section .terminal-window {
+        margin: 0;
+    }
+
+    /* About Section */
+    .about-content {
+        margin: 0;
+    }
+
+    .code-block {
+        font-size: var(--font-size-xs);
+        overflow-x: auto;
+    }
+
+    .code-block pre {
+        padding: var(--space-md);
+    }
+
+    .code-block code {
+        font-size: 10px;
+    }
+
+    /* Skills Section */
+    .skills-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+
+    .skill-category {
+        padding: var(--space-md);
+    }
+
+    /* Experience Section */
+    .experience-timeline {
+        margin-top: var(--space-lg);
+    }
+
+    .experience-item {
+        padding-left: var(--space-xl);
+        margin-bottom: var(--space-lg);
+    }
+
+    .experience-content {
+        padding: var(--space-md);
+    }
+
+    .experience-content ul {
+        padding-left: var(--space-md);
+    }
+
+    /* Education Section */
+    .education-list {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+
+    .education-item {
+        padding: var(--space-md);
+    }
+
+    /* Portfolio Section */
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+
+    .portfolio-card-header,
+    .portfolio-card-body,
+    .portfolio-card-footer {
+        padding: var(--space-md);
+    }
+
+    .portfolio-metrics {
+        flex-direction: column;
+        gap: var(--space-sm);
+    }
+
+    /* Blog Section */
+    .blog-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+
+    .blog-card-header,
+    .blog-card-body,
+    .blog-card-footer {
+        padding: var(--space-md);
+    }
+
+    .blog-snippet {
+        font-size: 9px;
+    }
+
+    /* Contact Section */
+    .contact-container {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+    }
+
+    .contact-form,
+    .contact-info {
+        padding: var(--space-md);
+    }
+
+    .input-wrapper input,
+    .textarea-wrapper textarea {
+        padding: var(--space-md) var(--space-md) var(--space-md) var(--space-xl);
+    }
+
+    .contact-link {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--space-sm);
+    }
+
+    .contact-details {
+        align-items: center;
+    }
+
+    /* Footer */
+    .footer {
+        padding: var(--space-lg) var(--space-md);
+    }
+
+    .terminal-prompt {
+        flex-direction: column;
+        gap: var(--space-xs);
+    }
+}
+
+/* ============================================
+   Tablet Styles (768px - 1023px)
+   ============================================ */
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    /* Typography Scaling */
+    :root {
+        --font-size-4xl: 2rem;
+        --font-size-3xl: 1.75rem;
+        --font-size-2xl: 1.5rem;
+    }
+
+    /* Hero Section */
+    .hero-section {
+        padding: var(--space-3xl) var(--space-lg);
+    }
+
+    /* Sections */
+    section {
+        padding: var(--space-3xl) var(--space-lg);
+    }
+
+    /* Skills Section */
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Portfolio Section */
+    .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Blog Section */
+    .blog-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Contact Section */
+    .contact-container {
+        grid-template-columns: 1fr;
+        gap: var(--space-xl);
+    }
+}
+
+/* ============================================
+   Desktop Styles (1024px - 1439px)
+   ============================================ */
+
+@media (min-width: 1024px) and (max-width: 1439px) {
+    /* Typography Scaling */
+    :root {
+        --font-size-4xl: 2.5rem;
+        --font-size-3xl: 2rem;
+        --font-size-2xl: 1.5rem;
+    }
+
+    /* Hero Section */
+    .hero-section {
+        padding: var(--space-3xl) var(--space-xl);
+    }
+
+    /* Sections */
+    section {
+        padding: var(--space-3xl) var(--space-xl);
+    }
+
+    /* Skills Section */
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Portfolio Section */
+    .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Blog Section */
+    .blog-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Contact Section */
+    .contact-container {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-xl);
+    }
+}
+
+/* ============================================
+   Large Desktop Styles (1440px and above)
+   ============================================ */
+
+@media (min-width: 1440px) {
+    /* Typography Scaling */
+    :root {
+        --font-size-4xl: 3rem;
+        --font-size-3xl: 2.5rem;
+        --font-size-2xl: 2rem;
+    }
+
+    /* Hero Section */
+    .hero-section {
+        padding: var(--space-3xl) var(--space-2xl);
+    }
+
+    /* Sections */
+    section {
+        padding: var(--space-3xl) var(--space-2xl);
+    }
+
+    /* Skills Section */
+    .skills-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* Portfolio Section */
+    .portfolio-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* Blog Section */
+    .blog-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* Contact Section */
+    .contact-container {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-2xl);
+    }
+}
+
+/* ============================================
+   Touch-friendly Adjustments
+   ============================================ */
+
+@media (pointer: coarse) {
+    /* Increase touch targets */
+    .nav-links a {
+        padding: var(--space-sm) var(--space-lg);
+    }
+
+    .terminal-btn {
+        padding: var(--space-lg) var(--space-xl);
+    }
+
+    .contact-link {
+        padding: var(--space-md);
+    }
+
+    .portfolio-link {
+        padding: var(--space-md) var(--space-xl);
+    }
+
+    /* Remove hover effects that don't work well on touch */
+    .skill-category:hover,
+    .portfolio-card:hover,
+    .blog-card:hover {
+        transform: none;
+    }
+
+    /* Focus styles for better accessibility */
+    input:focus,
+    textarea:focus,
+    button:focus,
+    a:focus {
+        outline: 2px solid var(--accent-green);
+        outline-offset: 2px;
+    }
+}
+
+/* ============================================
+   Dark Mode Optimization
+   ============================================ */
+
+@media (prefers-color-scheme: dark) {
+    /* This is already the default, but explicit */
+    :root {
+        --bg-primary: #0d1117;
+        --bg-secondary: #161b22;
+        --bg-tertiary: #21262d;
+    }
+}
+
+/* ============================================
+   Reduced Motion
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    /* Disable animations for users who prefer reduced motion */
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .typing-effect {
+        border-right: none;
+    }
+
+    .glow {
+        animation: none;
+    }
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+
+@media print {
+    /* Hide non-essential elements */
+    .terminal-nav,
+    .mobile-menu-btn,
+    .contact-form,
+    .terminal-controls {
+        display: none;
+    }
+
+    /* Ensure text is readable */
+    body {
+        background-color: white;
+        color: black;
+    }
+
+    .terminal-window {
+        background-color: white;
+        border: 1px solid #ccc;
+        box-shadow: none;
+    }
+
+    .terminal-content {
+        background-color: white;
+    }
+
+    /* Print-friendly colors */
+    a {
+        color: #0066cc;
+    }
+
+    h1, h2, h3, h4 {
+        color: #333;
+    }
+
+    /* Force page breaks where needed */
+    section {
+        page-break-inside: avoid;
+    }
+
+    .experience-item,
+    .portfolio-card,
+    .blog-card {
+        page-break-inside: avoid;
+    }
+}
+
+/* ============================================
+   Landscape Mobile Adjustments
+   ============================================ */
+
+@media (max-width: 767px) and (orientation: landscape) {
+    /* Reduce vertical spacing in landscape */
+    .hero-section {
+        padding: var(--space-lg) var(--space-md);
+    }
+
+    section {
+        padding: var(--space-lg) var(--space-md);
+    }
+
+    .ascii-art pre {
+        font-size: 6px;
+        line-height: 0.8;
+    }
+
+    .typing-effect,
+    .subtitle,
+    .tagline {
+        font-size: var(--font-size-base);
+    }
+}
+
+/* ============================================
+   High DPI Screens
+   ============================================ */
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    /* Crisper borders and shadows for Retina displays */
+    .terminal-window {
+        border-width: 0.5px;
+    }
+
+    .control-btn {
+        box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+    }
+}
+
+/* ============================================
+   Accessibility Improvements
+   ============================================ */
+
+/* Skip to main content link for keyboard users */
+.skip-to-content {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--accent-green);
+    color: var(--bg-primary);
+    padding: 8px;
+    z-index: 1000;
+    transition: top 0.3s;
+}
+
+.skip-to-content:focus {
+    top: 0;
+}
+
+/* Focus visible improvements */
+:focus-visible {
+    outline: 2px solid var(--accent-green);
+    outline-offset: 2px;
+}
+
+/* Screen reader only content */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}

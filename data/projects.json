@@ -1,0 +1,229 @@
+[
+  {
+    "id": 1,
+    "name": "LINE Bank by Hana Bank",
+    "description": "Digital banking application featuring comprehensive financial services including account management, transfers, investment tools, and debit card management. Successfully scaled to 1M+ downloads with robust security and seamless user experience.",
+    "metrics": [
+      { "value": "1M+", "label": "Downloads" },
+      { "value": "12%", "label": "Transaction Increase" },
+      { "value": "30%", "label": "Faster Resolution" }
+    ],
+    "stack": [
+      "Android SDK",
+      "Kotlin",
+      "MVVM",
+      "MVI",
+      "Firebase",
+      "Room",
+      "Retrofit",
+      "MLKit",
+      "Dagger2",
+      "Hilt"
+    ],
+    "highlights": [
+      "Scaled user acquisition to 1M+ downloads through architectural design of core features",
+      "Boosted transaction volume by 12% with geofencing promotional campaigns",
+      "Accelerated issue resolution time by 30% for millions of users",
+      "Designed internal eKYC SDK with on-device ML for 1M+ automated recognition",
+      "Architected Robo Advisor engine and secure portfolio management system"
+    ],
+    "role": "Android Engineer",
+    "company": "eWIDEPLUS Corp.",
+    "period": "2021 - Present",
+    "demoLink": "",
+    "codeLink": ""
+  },
+  {
+    "id": 2,
+    "name": "Orka - AI Spatial Assistant",
+    "description": "AI-powered spatial assistant for Vision Pro and Meta Quest platforms. Features real-time object detection, 360° immersive dashboard, and Personalized RAG technology for real-time website insights and AI-driven object customization in spatial environments.",
+    "metrics": [
+      { "value": "XR", "label": "Platform" },
+      { "value": "AI", "label": "Powered" },
+      { "value": "360°", "label": "Immersive" }
+    ],
+    "stack": [
+      "Meta XR SDK",
+      "Jetpack Compose for XR",
+      "MLKit",
+      "MediaPipe",
+      "Personalized RAG",
+      "Kotlin",
+      "Spatial UI/UX",
+      "3D Rendering Optimization"
+    ],
+    "highlights": [
+      "Redefined web and object interaction in spatial environments",
+      "Delivered dynamic 360° immersive dashboard",
+      "Integrated Personalized RAG for real-time website insights",
+      "Implemented AI-driven object detection and customization",
+      "Optimized for Vision Pro and Meta Quest platforms"
+    ],
+    "role": "Android Engineer",
+    "company": "eWIDEPLUS Corp.",
+    "period": "2021 - Present",
+    "demoLink": "",
+    "codeLink": ""
+  },
+  {
+    "id": 3,
+    "name": "AAC Tools - Accessibility Application",
+    "description": "Augmentative and Alternative Communication tools for education and accessibility. Flutter-based responsive application featuring complex drag-and-drop interactions, real-time symbol searching, and adaptive layouts for diverse screen resolutions including mobile, tablet, and foldable devices.",
+    "metrics": [
+      { "value": "30%", "label": "Faster Interaction" },
+      { "value": "Flutter", "label": "Framework" },
+      { "value": "3+", "label": "Form Factors" }
+    ],
+    "stack": [
+      "Flutter",
+      "Dart",
+      "BLOC",
+      "Cubit",
+      "Responsive Design",
+      "Accessibility",
+      "Real-time Updates",
+      "Drag-and-Drop"
+    ],
+    "highlights": [
+      "Improved communication efficiency by 30% for non-verbal users",
+      "Developed responsive Flutter-based application for multiple form factors",
+      "Implemented complex drag-and-drop interactions and real-time symbol searching",
+      "Created adaptive layouts for diverse screen resolutions",
+      "Built scalable statistics dashboard with auto-scrolling graph layouts"
+    ],
+    "role": "Android Engineer",
+    "company": "eWIDEPLUS Corp.",
+    "period": "2021 - Present",
+    "demoLink": "",
+    "codeLink": ""
+  },
+  {
+    "id": 4,
+    "name": "Field Force Management System",
+    "description": "Enterprise mobile application for field force coordination featuring offline-first architecture, real-time performance tracking, and robust synchronization. Designed for Nabati Group's eWork and eMing SFA applications.",
+    "metrics": [
+      { "value": "98%", "label": "Test Coverage" },
+      { "value": "Offline", "label": "First" },
+      { "value": "Real-time", "label": "Tracking" }
+    ],
+    "stack": [
+      "Android SDK",
+      "Kotlin",
+      "Clean Architecture",
+      "MVVM",
+      "Room",
+      "Retrofit",
+      "Coroutines",
+      "Jenkins",
+      "JUnit",
+      "Mockito"
+    ],
+    "highlights": [
+      "Increased unit test coverage from 52% to 98%",
+      "Architected Join Vision feature using Clean Architecture",
+      "Enabled seamless offline-to-online transitions",
+      "Developed robust store-and-forward synchronization system",
+      "Created dynamic Leaderboard feature for performance tracking"
+    ],
+    "role": "Technology Consultant",
+    "company": "PT Elektronik Distribusi Otomasi Terkemuka (eDOT)",
+    "period": "January - May 2026",
+    "demoLink": "",
+    "codeLink": ""
+  },
+  {
+    "id": 5,
+    "name": "Android Development Curriculum",
+    "description": "Comprehensive educational curriculum for Android and Flutter development, covering beginner to advanced topics. Includes hands-on projects, coding exercises, and real-world applications designed for institutional training.",
+    "metrics": [
+      { "value": "38%", "label": "Enrollment Increase" },
+      { "value": "100%", "label": "Enrollment Rate" },
+      { "value": "82%", "label": "Satisfaction" }
+    ],
+    "stack": [
+      "Android SDK",
+      "Kotlin",
+      "Java",
+      "Flutter",
+      "Dart",
+      "MVVM",
+      "Clean Architecture",
+      "Testing",
+      "Educational Design"
+    ],
+    "highlights": [
+      "Achieved 38% increase in student registrations with 100% enrollment rates",
+      "Designed and implemented 3 comprehensive curricula (Beginner, Intermediate, Advanced)",
+      "Authored 2 technical books covering Android and Flutter development",
+      "Maintained 82% average student satisfaction rate",
+      "Supported hundreds of students within IDN Class learning journey"
+    ],
+    "role": "Android and Flutter Trainer",
+    "company": "PT Integra Data Nusantara",
+    "period": "2018 - 2021",
+    "demoLink": "",
+    "codeLink": ""
+  },
+  {
+    "id": 6,
+    "name": "Code Review System",
+    "description": "Comprehensive code review system for evaluating student projects, ensuring adherence to industry best practices, and providing constructive feedback for code quality improvement.",
+    "metrics": [
+      { "value": "1,500+", "label": "Projects Reviewed" },
+      { "value": "5★", "label": "Student Rating" },
+      { "value": "Best Practices", "label": "Focus" }
+    ],
+    "stack": [
+      "Code Review",
+      "Quality Assurance",
+      "Best Practices",
+      "Architectural Patterns",
+      "Flutter",
+      "Android",
+      "Educational Feedback"
+    ],
+    "highlights": [
+      "Evaluated 1,500+ student projects with comprehensive code reviews",
+      "Consistently earned 5-star student ratings for feedback quality",
+      "Optimized code readability and eliminated boilerplate code",
+      "Provided constructive architectural feedback",
+      "Ensured strict adherence to industry best practices and project requirements"
+    ],
+    "role": "Flutter External Code Reviewer (Part Time)",
+    "company": "PT Dcoding Indonesia",
+    "period": "2019 - 2021",
+    "demoLink": "",
+    "codeLink": ""
+  },
+  {
+    "id": 7,
+    "name": "Palm Oil Price Monitoring Application",
+    "description": "Mobile application for monitoring palm oil prices with real-time market data tracking, detailed product catalog, and dynamic price charts. Delivered high-quality product visualization for market analysis.",
+    "metrics": [
+      { "value": "9.8/10", "label": "Client Rating" },
+      { "value": "3+", "label": "Months Extended" },
+      { "value": "Real-time", "label": "Data" }
+    ],
+    "stack": [
+      "Android SDK",
+      "Java",
+      "XML",
+      "Real-time Updates",
+      "Data Visualization",
+      "Price Charts",
+      "Product Catalog"
+    ],
+    "highlights": [
+      "Extended internship by 3 months through exceptional performance",
+      "Delivered Palm Oil price monitoring application",
+      "Achieved 9.8/10 client satisfaction rating",
+      "Developed core application features including detailed product catalog",
+      "Implemented dynamic price charts for market analysis"
+    ],
+    "role": "Junior Android Developer Intern",
+    "company": "PT Can Creative",
+    "period": "2017 - 2018",
+    "demoLink": "",
+    "codeLink": ""
+  }
+]
