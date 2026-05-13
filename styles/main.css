@@ -857,6 +857,7 @@ section .terminal-window {
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: var(--space-xl);
     margin-top: var(--space-xl);
+    align-items: stretch;
 }
 
 .blog-card {
@@ -865,6 +866,9 @@ section .terminal-window {
     border-radius: var(--radius-md);
     overflow: hidden;
     transition: all var(--transition-base);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .blog-card:hover {
@@ -897,6 +901,7 @@ section .terminal-window {
 
 .blog-card-body {
     padding: var(--space-lg);
+    flex: 1;
 }
 
 .blog-card p {
