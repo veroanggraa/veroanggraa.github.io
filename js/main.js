@@ -562,9 +562,13 @@ function initTerminalEffects() {
    ============================================ */
 
 function initThemeSystem() {
-    // Determine initial theme (default to dark)
+    // Determine initial theme
     const savedTheme = localStorage.getItem('theme');
-    const initialTheme = savedTheme || 'dark';
+    let initialTheme = savedTheme;
+    
+    if (!initialTheme) {
+        initialTheme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    }
 
     // Apply initial theme
     setTheme(initialTheme);

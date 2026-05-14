@@ -377,18 +377,7 @@
     }
 }
 
-/* ============================================
-   Dark Mode Optimization
-   ============================================ */
-
-@media (prefers-color-scheme: dark) {
-    /* This is already the default, but explicit */
-    :root {
-        --bg-primary: #0d1117;
-        --bg-secondary: #161b22;
-        --bg-tertiary: #21262d;
-    }
-}
+/* Redundant dark mode block removed to prevent specificity issues with manual toggle */
 
 /* ============================================
    Reduced Motion
