@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://veroanggraa.github.io/sitemap.xml
