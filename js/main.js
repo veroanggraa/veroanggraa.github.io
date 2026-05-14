@@ -3,7 +3,7 @@
    ============================================ */
 
 // Wait for DOM to be fully loaded
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     initThemeSystem();
     initMobileMenu();
     initTypingEffects();
@@ -19,12 +19,12 @@ document.addEventListener('DOMContentLoaded', function() {
    Mobile Menu Toggle
    ============================================ */
 
-function initMobileMenu() {
+function initMobileMenu () {
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.nav-links');
 
     if (mobileMenuBtn && navLinks) {
-        mobileMenuBtn.addEventListener('click', function() {
+        mobileMenuBtn.addEventListener('click', function () {
             navLinks.classList.toggle('active');
             mobileMenuBtn.classList.toggle('active');
 
@@ -39,7 +39,7 @@ function initMobileMenu() {
 
         // Close menu when clicking on a link
         navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', function() {
+            link.addEventListener('click', function () {
                 navLinks.classList.remove('active');
                 mobileMenuBtn.classList.remove('active');
                 const menuIcon = mobileMenuBtn.querySelector('.menu-icon');
@@ -48,7 +48,7 @@ function initMobileMenu() {
         });
 
         // Close menu when clicking outside
-        document.addEventListener('click', function(event) {
+        document.addEventListener('click', function (event) {
             if (!mobileMenuBtn.contains(event.target) && !navLinks.contains(event.target)) {
                 navLinks.classList.remove('active');
                 mobileMenuBtn.classList.remove('active');
@@ -63,7 +63,7 @@ function initMobileMenu() {
    Typing Effects
    ============================================ */
 
-function initTypingEffects() {
+function initTypingEffects () {
     const typingElements = document.querySelectorAll('.typing-effect');
 
     typingElements.forEach(element => {
@@ -74,11 +74,11 @@ function initTypingEffects() {
     });
 }
 
-function typeWriter(element, text, speed) {
+function typeWriter (element, text, speed) {
     let i = 0;
     element.textContent = '';
 
-    function type() {
+    function type () {
         if (i < text.length) {
             element.textContent += text.charAt(i);
             i++;
@@ -93,11 +93,11 @@ function typeWriter(element, text, speed) {
    Smooth Scrolling
    ============================================ */
 
-function initSmoothScrolling() {
+function initSmoothScrolling () {
     const links = document.querySelectorAll('a[href^="#"]');
 
     links.forEach(link => {
-        link.addEventListener('click', function(e) {
+        link.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
 
             if (href !== '#') {
@@ -123,14 +123,14 @@ function initSmoothScrolling() {
    Scroll Animations
    ============================================ */
 
-function initScrollAnimations() {
+function initScrollAnimations () {
     const observerOptions = {
         root: null,
         rootMargin: '0px',
         threshold: 0.1
     };
 
-    const observer = new IntersectionObserver(function(entries) {
+    const observer = new IntersectionObserver(function (entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('fade-in');
@@ -154,11 +154,11 @@ function initScrollAnimations() {
    Contact Form Validation
    ============================================ */
 
-function initContactForm() {
+function initContactForm () {
     const contactForm = document.getElementById('contact-form');
 
     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', function (e) {
             e.preventDefault();
 
             // Basic validation
@@ -197,18 +197,26 @@ function initContactForm() {
             }
 
             if (isValid) {
-                // Show success message
-                showFormMessage('Message sent successfully! (Demo mode - no backend connected)', 'success');
-                contactForm.reset();
+                // Change button state
+                const submitBtn = contactForm.querySelector('button[type="submit"]');
+                const originalBtnText = submitBtn.innerHTML;
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<span class="btn-cmd">$ ./sending...</span><span class="btn-text">Sending...</span>';
 
-                // Log form data for demo purposes
-                console.log('Form submitted:', {
-                    name,
-                    email,
-                    subject,
-                    message,
-                    timestamp: new Date().toISOString()
-                });
+                // Send email using EmailJS from config
+                emailjs.sendForm(CONFIG.EMAILJS_SERVICE_ID, CONFIG.EMAILJS_TEMPLATE_ID, contactForm)
+                    .then(() => {
+                        showFormMessage('Message sent successfully! I will get back to you soon.', 'success');
+                        contactForm.reset();
+                    })
+                    .catch((error) => {
+                        console.error('EmailJS Error:', error);
+                        showFormMessage('Failed to send message. Please try again later.', 'error');
+                    })
+                    .finally(() => {
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = originalBtnText;
+                    });
             } else {
                 showFormMessage(errorMessage, 'error');
             }
@@ -216,7 +224,7 @@ function initContactForm() {
     }
 }
 
-function showFormMessage(message, type) {
+function showFormMessage (message, type) {
     // Remove any existing messages
     const existingMessage = document.querySelector('.form-message');
     if (existingMessage) {
@@ -270,7 +278,7 @@ function showFormMessage(message, type) {
    Portfolio Data Loading
    ============================================ */
 
-function loadPortfolioData() {
+function loadPortfolioData () {
     const portfolioGrid = document.getElementById('portfolio-grid');
 
     if (portfolioGrid) {
@@ -286,7 +294,7 @@ function loadPortfolioData() {
     }
 }
 
-function displayProjects(projects) {
+function displayProjects (projects) {
     const portfolioGrid = document.getElementById('portfolio-grid');
 
     if (!portfolioGrid) return;
@@ -299,7 +307,7 @@ function displayProjects(projects) {
     });
 }
 
-function createProjectCard(project) {
+function createProjectCard (project) {
     const card = document.createElement('div');
     card.className = 'portfolio-card';
     card.innerHTML = `
@@ -331,7 +339,7 @@ function createProjectCard(project) {
     return card;
 }
 
-function displayFallbackPortfolio() {
+function displayFallbackPortfolio () {
     const portfolioGrid = document.getElementById('portfolio-grid');
 
     if (!portfolioGrid) return;
@@ -406,7 +414,7 @@ function displayFallbackPortfolio() {
    Blog Data Loading
    ============================================ */
 
-function loadBlogData() {
+function loadBlogData () {
     const blogGrid = document.getElementById('blog-grid');
 
     if (blogGrid) {
@@ -422,7 +430,7 @@ function loadBlogData() {
     }
 }
 
-function displayBlogArticles(articles) {
+function displayBlogArticles (articles) {
     const blogGrid = document.getElementById('blog-grid');
 
     if (!blogGrid) return;
@@ -435,7 +443,7 @@ function displayBlogArticles(articles) {
     });
 }
 
-function createBlogCard(article) {
+function createBlogCard (article) {
     const card = document.createElement('div');
     card.className = 'blog-card';
     card.innerHTML = `
@@ -458,7 +466,7 @@ function createBlogCard(article) {
     return card;
 }
 
-function displayFallbackBlog() {
+function displayFallbackBlog () {
     const blogGrid = document.getElementById('blog-grid');
 
     if (!blogGrid) return;
@@ -532,7 +540,7 @@ fun SpatialDashboard() {
    Terminal Effects
    ============================================ */
 
-function initTerminalEffects() {
+function initTerminalEffects () {
     // Add random cursor blinking delays
     const typingElements = document.querySelectorAll('.typing-effect');
     typingElements.forEach(element => {
@@ -543,12 +551,12 @@ function initTerminalEffects() {
     // Add hover effects to skill tags
     const skillTags = document.querySelectorAll('.skill-tag');
     skillTags.forEach(tag => {
-        tag.addEventListener('mouseenter', function() {
+        tag.addEventListener('mouseenter', function () {
             this.style.transform = 'scale(1.1)';
             this.style.transition = 'transform 0.2s ease';
         });
 
-        tag.addEventListener('mouseleave', function() {
+        tag.addEventListener('mouseleave', function () {
             this.style.transform = 'scale(1)';
         });
     });
@@ -561,11 +569,11 @@ function initTerminalEffects() {
    Theme Management
    ============================================ */
 
-function initThemeSystem() {
+function initThemeSystem () {
     // Determine initial theme
     const savedTheme = localStorage.getItem('theme');
     let initialTheme = savedTheme;
-    
+
     if (!initialTheme) {
         initialTheme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
     }
@@ -582,7 +590,7 @@ function initThemeSystem() {
     }
 }
 
-function setTheme(theme) {
+function setTheme (theme) {
     // Set data attribute on html element
     document.documentElement.setAttribute('data-theme', theme);
 
@@ -596,7 +604,7 @@ function setTheme(theme) {
     updateMetaThemeColor(theme);
 }
 
-function updateThemeIcon(theme) {
+function updateThemeIcon (theme) {
     const themeToggle = document.querySelector('.theme-toggle');
     const themeIcon = themeToggle?.querySelector('.theme-icon');
 
@@ -605,18 +613,18 @@ function updateThemeIcon(theme) {
     }
 }
 
-function initThemeToggle() {
+function initThemeToggle () {
     const themeToggle = document.querySelector('.theme-toggle');
 
     if (themeToggle) {
-        themeToggle.addEventListener('click', function() {
+        themeToggle.addEventListener('click', function () {
             const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
             setTheme(newTheme);
         });
 
         // Keyboard accessibility
-        themeToggle.addEventListener('keydown', function(e) {
+        themeToggle.addEventListener('keydown', function (e) {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
                 const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
@@ -627,14 +635,14 @@ function initThemeToggle() {
     }
 }
 
-function handleSystemThemeChange(e) {
+function handleSystemThemeChange (e) {
     // Only auto-switch if user hasn't manually set a preference
     if (!localStorage.getItem('theme')) {
         setTheme(e.matches ? 'dark' : 'light');
     }
 }
 
-function updateMetaThemeColor(theme) {
+function updateMetaThemeColor (theme) {
     const metaThemeColor = document.querySelector('meta[name="theme-color"]');
     if (metaThemeColor) {
         const color = theme === 'dark' ? '#0d1117' : '#f8f9fa';
@@ -646,7 +654,7 @@ function updateMetaThemeColor(theme) {
    Navigation Highlighting
    ============================================ */
 
-function initNavHighlighting() {
+function initNavHighlighting () {
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-links a');
 
@@ -656,7 +664,7 @@ function initNavHighlighting() {
         threshold: 0
     };
 
-    const observer = new IntersectionObserver(function(entries) {
+    const observer = new IntersectionObserver(function (entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 // Remove active class from all links
@@ -684,9 +692,9 @@ function initNavHighlighting() {
    ============================================ */
 
 // Debounce function for performance optimization
-function debounce(func, wait) {
+function debounce (func, wait) {
     let timeout;
-    return function executedFunction(...args) {
+    return function executedFunction (...args) {
         const later = () => {
             clearTimeout(timeout);
             func(...args);
@@ -697,13 +705,13 @@ function debounce(func, wait) {
 }
 
 // Format date for blog articles
-function formatDate(dateString) {
+function formatDate (dateString) {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(dateString).toLocaleDateString('en-US', options);
 }
 
 // Escape HTML for security
-function escapeHtml(unsafe) {
+function escapeHtml (unsafe) {
     return unsafe
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
@@ -717,7 +725,7 @@ function escapeHtml(unsafe) {
    ============================================ */
 
 // Additional initialization
-window.addEventListener('load', function() {
+window.addEventListener('load', function () {
     console.log('Veronica\'s Portfolio - Loaded Successfully');
     console.log('Terminal Mode: Active');
     console.log('Tech Stack: HTML, CSS, JavaScript (No Framework)');
@@ -733,7 +741,7 @@ window.addEventListener('load', function() {
 });
 
 // Handle window resize events
-window.addEventListener('resize', debounce(function() {
+window.addEventListener('resize', debounce(function () {
     // Close mobile menu on resize to desktop
     const navLinks = document.querySelector('.nav-links');
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
@@ -747,7 +755,7 @@ window.addEventListener('resize', debounce(function() {
 }, 250));
 
 // Keyboard accessibility enhancements
-document.addEventListener('keydown', function(e) {
+document.addEventListener('keydown', function (e) {
     // ESC key closes mobile menu
     if (e.key === 'Escape') {
         const navLinks = document.querySelector('.nav-links');

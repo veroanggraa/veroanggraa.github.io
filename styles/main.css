@@ -12,10 +12,14 @@
     --text-muted: #6e7681;
 
     /* Neon Accents */
-    --accent-green: #3DDC84;      /* Android Green */
-    --accent-cyan: #00BCD4;       /* Cyan */
-    --accent-purple: #9C27B0;     /* Purple */
-    --accent-blue: #2196F3;       /* Blue */
+    --accent-green: #3DDC84;
+    /* Android Green */
+    --accent-cyan: #00BCD4;
+    /* Cyan */
+    --accent-purple: #9C27B0;
+    /* Purple */
+    --accent-blue: #2196F3;
+    /* Blue */
 
     /* Terminal Colors */
     --terminal-bg: #1e1e1e;
@@ -148,7 +152,8 @@ a:hover {
     color: var(--accent-cyan);
 }
 
-ul, ol {
+ul,
+ol {
     list-style: none;
 }
 
@@ -207,7 +212,12 @@ img {
    Typography
    ============================================ */
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: var(--font-mono-bold);
     color: var(--text-primary);
     margin-bottom: var(--space-md);
@@ -887,7 +897,7 @@ section .terminal-window {
 
 .blog-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--space-xl);
     margin-top: var(--space-xl);
     align-items: stretch;
@@ -1212,6 +1222,7 @@ section .terminal-window {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -1219,18 +1230,25 @@ section .terminal-window {
 }
 
 @keyframes blink {
-    0%, 50% {
+
+    0%,
+    50% {
         border-color: var(--accent-green);
     }
-    51%, 100% {
+
+    51%,
+    100% {
         border-color: transparent;
     }
 }
 
 @keyframes glow {
-    0%, 100% {
+
+    0%,
+    100% {
         box-shadow: 0 0 5px var(--accent-glow-subtle);
     }
+
     50% {
         box-shadow: 0 0 20px var(--accent-glow);
     }
