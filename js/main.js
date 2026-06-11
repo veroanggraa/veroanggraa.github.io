@@ -9,11 +9,20 @@ document.addEventListener('DOMContentLoaded', function () {
     initTypingEffects();
     initSmoothScrolling();
     initScrollAnimations();
+    initEmailService();
     initContactForm();
     loadPortfolioData();
     loadBlogData();
     initTerminalEffects();
 });
+
+function initEmailService () {
+    if (window.emailjs && window.CONFIG && CONFIG.EMAILJS_PUBLIC_KEY) {
+        emailjs.init({
+            publicKey: CONFIG.EMAILJS_PUBLIC_KEY
+        });
+    }
+}
 
 /* ============================================
    Mobile Menu Toggle
@@ -197,6 +206,11 @@ function initContactForm () {
             }
 
             if (isValid) {
+                if (!window.emailjs || !window.CONFIG) {
+                    showFormMessage('Contact form is temporarily unavailable. Please email me directly.', 'error');
+                    return;
+                }
+
                 // Change button state
                 const submitBtn = contactForm.querySelector('button[type="submit"]');
                 const originalBtnText = submitBtn.innerHTML;
@@ -308,31 +322,34 @@ function displayProjects (projects) {
 }
 
 function createProjectCard (project) {
-    const card = document.createElement('div');
+    const card = document.createElement('article');
     card.className = 'portfolio-card';
+    const metrics = Array.isArray(project.metrics) ? project.metrics : [];
+    const stack = Array.isArray(project.stack) ? project.stack : [];
+
     card.innerHTML = `
         <div class="portfolio-card-header">
-            <h3>${project.name}</h3>
+            <h3>${escapeHtml(project.name)}</h3>
         </div>
         <div class="portfolio-card-body">
-            <p>${project.description}</p>
+            <p>${escapeHtml(project.description)}</p>
             <div class="portfolio-metrics">
-                ${project.metrics.map(metric => `
+                ${metrics.map(metric => `
                     <div class="metric">
-                        <span class="metric-value">${metric.value}</span>
-                        <span>${metric.label}</span>
+                        <span class="metric-value">${escapeHtml(metric.value)}</span>
+                        <span>${escapeHtml(metric.label)}</span>
                     </div>
                 `).join('')}
             </div>
             <div class="portfolio-stack">
-                ${project.stack.map(tech => `
-                    <span class="stack-item">${tech}</span>
+                ${stack.map(tech => `
+                    <span class="stack-item">${escapeHtml(tech)}</span>
                 `).join('')}
             </div>
         </div>
         <div class="portfolio-card-footer">
-            ${project.demoLink ? `<a href="${project.demoLink}" target="_blank" rel="noopener noreferrer" class="portfolio-link">Live Demo</a>` : ''}
-            ${project.codeLink ? `<a href="${project.codeLink}" target="_blank" rel="noopener noreferrer" class="portfolio-link">View Code</a>` : ''}
+            ${project.demoLink ? `<a href="${escapeHtml(project.demoLink)}" target="_blank" rel="noopener noreferrer" class="portfolio-link">Live Demo</a>` : ''}
+            ${project.codeLink ? `<a href="${escapeHtml(project.codeLink)}" target="_blank" rel="noopener noreferrer" class="portfolio-link">View Code</a>` : ''}
         </div>
     `;
 
@@ -437,29 +454,33 @@ function displayBlogArticles (articles) {
 
     blogGrid.innerHTML = '';
 
-    articles.slice(0, 6).forEach(article => {
-        const articleCard = createBlogCard(article);
-        blogGrid.appendChild(articleCard);
-    });
+    articles
+        .slice()
+        .sort((a, b) => new Date(b.date) - new Date(a.date))
+        .slice(0, 6)
+        .forEach(article => {
+            const articleCard = createBlogCard(article);
+            blogGrid.appendChild(articleCard);
+        });
 }
 
 function createBlogCard (article) {
-    const card = document.createElement('div');
+    const card = document.createElement('article');
     card.className = 'blog-card';
     card.innerHTML = `
         <div class="blog-card-header">
-            <span class="blog-category">${article.category}</span>
-            <h3>${article.title}</h3>
+            <span class="blog-category">${escapeHtml(article.category)}</span>
+            <h3>${escapeHtml(article.title)}</h3>
         </div>
         <div class="blog-card-body">
-            <p>${article.excerpt}</p>
+            <p>${escapeHtml(article.excerpt)}</p>
             <div class="blog-snippet">
-                <pre><code>${article.snippet}</code></pre>
+                <pre><code>${escapeHtml(article.snippet)}</code></pre>
             </div>
         </div>
         <div class="blog-card-footer">
-            <span class="blog-date">${article.date}</span>
-            <a href="${article.link}" target="_blank" rel="noopener noreferrer" class="blog-link">Read More →</a>
+            <time class="blog-date" datetime="${escapeHtml(article.date)}">${formatDate(article.date)}</time>
+            <a href="${escapeHtml(article.link)}" target="_blank" rel="noopener noreferrer" class="blog-link">Read More</a>
         </div>
     `;
 
@@ -712,7 +733,7 @@ function formatDate (dateString) {
 
 // Escape HTML for security
 function escapeHtml (unsafe) {
-    return unsafe
+    return String(unsafe ?? '')
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")

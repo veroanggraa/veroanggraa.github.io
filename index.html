@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0d1117">
+    <meta name="color-scheme" content="dark light">
+    <meta name="author" content="Veronica Putri Anggraini">
+    <meta name="keywords"
+        content="Veronica Putri Anggraini, Android Engineer, Google Developer Expert, Kotlin, Jetpack Compose, Android XR, Flutter, Jakarta software engineer">
     <title>Veronica Putri Anggraini | Software Engineer Android & GDE</title>
 
     <link rel="icon"
@@ -21,41 +25,45 @@
         })();
     </script>
     <meta name="description"
-        content="Personal website of Veronica Putri Anggraini - Software Engineer Android and Google Developer Expert. Building impactful Android experiences and empowering the Southeast Asian developer community.">
+        content="Veronica Putri Anggraini is an Android Software Engineer and Google Developer Expert in Jakarta, building Kotlin, Jetpack Compose, Flutter, XR, and AI-powered mobile experiences.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://veroanggraa.github.io/">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="alternate" type="application/rss+xml" title="Veronica Putri Anggraini on Medium"
+        href="https://medium.com/feed/@veroanggra">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Veronica Putri Anggraini">
+    <meta property="og:locale" content="en_US">
     <meta property="og:url" content="https://veroanggraa.github.io/">
     <meta property="og:title" content="Veronica Putri Anggraini | Software Engineer Android & GDE">
     <meta property="og:description"
-        content="Software Engineer Android and Google Developer Expert. Building impactful Android experiences and empowering the Southeast Asian developer community.">
+        content="Android Software Engineer and Google Developer Expert building Kotlin, Jetpack Compose, Flutter, XR, and AI-powered mobile experiences.">
     <meta property="og:image" content="https://veroanggraa.github.io/images/og-image.png">
+    <meta property="og:image:alt"
+        content="Veronica Putri Anggraini, Android Software Engineer and Google Developer Expert">
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://veroanggraa.github.io/">
-    <meta property="twitter:title" content="Veronica Putri Anggraini | Software Engineer Android & GDE">
-    <meta property="twitter:description"
-        content="Software Engineer Android and Google Developer Expert. Building impactful Android experiences and empowering the Southeast Asian developer community.">
-    <meta property="twitter:image" content="https://veroanggraa.github.io/images/og-image.png">
-    
-    <!-- EmailJS SDK -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script type="text/javascript" src="js/config.js"></script>
-    <script type="text/javascript">
-        (function() {
-            // Initialize EmailJS with Public Key from config
-            emailjs.init({
-              publicKey: CONFIG.EMAILJS_PUBLIC_KEY,
-            });
-        })();
-    </script>
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/responsive.css">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://veroanggraa.github.io/">
+    <meta name="twitter:title" content="Veronica Putri Anggraini | Software Engineer Android & GDE">
+    <meta name="twitter:description"
+        content="Android Software Engineer and Google Developer Expert building Kotlin, Jetpack Compose, Flutter, XR, and AI-powered mobile experiences.">
+    <meta name="twitter:image" content="https://veroanggraa.github.io/images/og-image.png">
+    <meta name="twitter:image:alt"
+        content="Veronica Putri Anggraini, Android Software Engineer and Google Developer Expert">
+
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" defer></script>
+    <script type="text/javascript" src="js/config.js" defer></script>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/responsive.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
@@ -64,23 +72,52 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Veronica Putri Anggraini",
-      "url": "https://veroanggraa.github.io/",
-      "jobTitle": "Software Engineer Android & Google Developer Expert",
-      "sameAs": [
-        "https://linkedin.com/in/veroanggra",
-        "https://github.com/veroanggraa",
-        "https://medium.com/@veroanggra"
-      ],
-      "description": "Software Engineer Android and Google Developer Expert. Building impactful Android experiences and empowering the Southeast Asian developer community."
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://veroanggraa.github.io/#website",
+          "name": "Veronica Putri Anggraini",
+          "url": "https://veroanggraa.github.io/",
+          "description": "Portfolio and technical writing by Veronica Putri Anggraini, Android Software Engineer and Google Developer Expert."
+        },
+        {
+          "@type": "Person",
+          "@id": "https://veroanggraa.github.io/#person",
+          "name": "Veronica Putri Anggraini",
+          "url": "https://veroanggraa.github.io/",
+          "email": "mailto:veronicaputri497@gmail.com",
+          "telephone": "+6281281462016",
+          "jobTitle": "Android Software Engineer and Google Developer Expert",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Jakarta",
+            "addressCountry": "ID"
+          },
+          "knowsAbout": [
+            "Android development",
+            "Kotlin",
+            "Jetpack Compose",
+            "Flutter",
+            "Android XR",
+            "Mobile architecture",
+            "AI-powered mobile applications"
+          ],
+          "sameAs": [
+            "https://linkedin.com/in/veroanggra",
+            "https://github.com/veroanggraa",
+            "https://medium.com/@veroanggra"
+          ],
+          "description": "Android Software Engineer and Google Developer Expert building impactful Android, Flutter, XR, and AI-powered mobile experiences."
+        }
+      ]
     }
     </script>
 </head>
 
 <body>
+    <a class="skip-to-content" href="#main-content">Skip to main content</a>
     <!-- Terminal Navigation -->
-    <nav class="terminal-nav">
+    <nav class="terminal-nav" aria-label="Primary navigation">
         <div class="terminal-header">
             <span class="terminal-title">veronica@dev:~$</span>
             <div class="terminal-controls">
@@ -102,6 +139,7 @@
         </button>
     </nav>
 
+    <main id="main-content">
     <!-- Hero Section -->
     <section class="hero-section" id="hero">
         <div class="terminal-window">
@@ -449,6 +487,26 @@ function buildImpact() {
                 <h2>// Portfolio Showcase</h2>
                 <div class="portfolio-grid" id="portfolio-grid">
                     <!-- Portfolio items will be dynamically loaded from projects.json -->
+                    <noscript>
+                        <article class="portfolio-card">
+                            <div class="portfolio-card-header">
+                                <h3>LINE Bank by Hana Bank</h3>
+                            </div>
+                            <div class="portfolio-card-body">
+                                <p>Android digital banking application work covering Kotlin architecture, secure mobile
+                                    features, eKYC, transactions, and investment experiences for 1M+ downloads.</p>
+                            </div>
+                        </article>
+                        <article class="portfolio-card">
+                            <div class="portfolio-card-header">
+                                <h3>Orka - AI Spatial Assistant</h3>
+                            </div>
+                            <div class="portfolio-card-body">
+                                <p>AI spatial assistant for Vision Pro and Meta Quest using object detection,
+                                    personalized RAG, immersive dashboards, and spatial UI patterns.</p>
+                            </div>
+                        </article>
+                    </noscript>
                 </div>
             </div>
         </div>
@@ -469,6 +527,28 @@ function buildImpact() {
                 <h2>// Latest Articles</h2>
                 <div class="blog-grid" id="blog-grid">
                     <!-- Blog articles will be dynamically loaded from blog-articles.json -->
+                    <noscript>
+                        <article class="blog-card">
+                            <div class="blog-card-header">
+                                <span class="blog-category">Android Development</span>
+                                <h3>Building a Glowing Bottom Navigation with AGSL Shaders</h3>
+                            </div>
+                            <div class="blog-card-body">
+                                <p>Technical writing about Android Graphics Shading Language, Jetpack Compose, shader
+                                    effects, and high-performance UI implementation.</p>
+                            </div>
+                        </article>
+                        <article class="blog-card">
+                            <div class="blog-card-header">
+                                <span class="blog-category">Spatial Computing</span>
+                                <h3>Dive Into Spatial Panel UI in Android XR</h3>
+                            </div>
+                            <div class="blog-card-body">
+                                <p>Guides and experiments for Android XR, Jetpack Compose for XR, spatial panels, and
+                                    immersive application interfaces.</p>
+                            </div>
+                        </article>
+                    </noscript>
                 </div>
                 <div class="blog-cta">
                     <a href="https://veroanggra.medium.com/" target="_blank" rel="noopener noreferrer"
@@ -592,6 +672,7 @@ function buildImpact() {
             </div>
         </div>
     </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
@@ -607,7 +688,7 @@ function buildImpact() {
     </footer>
 
     <!-- Scripts -->
-    <script src="js/main.js"></script>
+    <script src="js/main.js" defer></script>
 
     <!-- Theme Toggle Button -->
     <button class="theme-toggle" aria-label="Toggle theme" title="Switch between light and dark mode">

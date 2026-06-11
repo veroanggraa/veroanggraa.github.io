@@ -11,6 +11,9 @@ echo ""
 echo "📁 Checking file structure..."
 files=(
     "index.html"
+    "robots.txt"
+    "sitemap.xml"
+    "site.webmanifest"
     "styles/main.css"
     "styles/responsive.css"
     "js/main.js"
@@ -62,7 +65,8 @@ echo ""
 echo "⚡ Checking JavaScript file..."
 if grep -q "initMobileMenu" js/main.js && \
    grep -q "loadPortfolioData" js/main.js && \
-   grep -q "loadBlogData" js/main.js; then
+   grep -q "loadBlogData" js/main.js && \
+   grep -q "initEmailService" js/main.js; then
     echo "✅ JavaScript has all required functions"
 else
     echo "❌ JavaScript missing required functions"
@@ -86,6 +90,12 @@ if jq empty data/blog-articles.json 2>/dev/null; then
     echo "   Found $article_count articles"
 else
     echo "❌ blog-articles.json has JSON syntax errors"
+fi
+
+if jq empty site.webmanifest 2>/dev/null; then
+    echo "✅ site.webmanifest is valid JSON"
+else
+    echo "❌ site.webmanifest has JSON syntax errors"
 fi
 
 echo ""
