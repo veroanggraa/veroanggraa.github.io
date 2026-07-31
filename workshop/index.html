@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Membangun Asisten Chat Offline dengan Gemma di Android</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --page-bg:#FFFFFF;
+    --ink:#202124;
+    --body-text:#3C4043;
+    --muted:#5F6368;
+    --border:#E3E5E8;
+    --shadow:0 1px 2px rgba(60,64,67,.08), 0 1px 3px rgba(60,64,67,.06);
+    --blue:#1A73E8;
+    --blue-dark:#1557B0;
+    --gray-fill:#E8EAED;
+    --green-bg:#E6F4EA;
+    --green-border:#B7DFC0;
+    --green-text:#0D652D;
+    --yellow-bg:#FEF7E0;
+    --yellow-border:#F6D680;
+    --yellow-text:#7A5B00;
+    --code-bg:#1F2430;
+    --code-text:#E6E9EF;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--page-bg);
+    color:var(--body-text);
+    font-family:'Roboto',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.gsans{font-family:'Google Sans','Roboto',sans-serif;}
+  code, pre, .mono{font-family:'Roboto Mono',monospace;}
+
+  /* ---------- Top bar ---------- */
+  .topbar{
+    height:68px; display:flex; align-items:center; justify-content:space-between;
+    padding:0 28px; border-bottom:1px solid var(--border);
+    position:sticky; top:0; background:#fff; z-index:40;
+  }
+  .topbar-title{font-size:19px; font-weight:500; color:var(--ink); font-family:'Google Sans','Roboto',sans-serif;}
+  .topbar-right{display:flex; align-items:center; gap:22px;}
+  .lang-select{
+    display:flex; align-items:center; gap:7px;
+    font-size:14px; color:var(--body-text); cursor:pointer;
+  }
+  .lang-select svg{width:18px; height:18px; opacity:.7;}
+  .avatar{
+    width:34px; height:34px; border-radius:50%; flex-shrink:0;
+    background:conic-gradient(from 200deg, #4285F4, #EA4335, #FBBC05, #34A853, #4285F4);
+    box-shadow:0 0 0 2px #fff, 0 0 0 3px var(--border);
+  }
+
+  /* ---------- Shell ---------- */
+  .shell{display:flex; align-items:flex-start;}
+
+  /* ---------- Sidebar ---------- */
+  .sidebar{
+    width:360px; flex-shrink:0; padding:26px 22px 22px 26px;
+    position:sticky; top:68px; height:calc(100vh - 68px);
+    display:flex; flex-direction:column;
+  }
+  .steps-list{list-style:none; margin:0; padding:0; overflow-y:auto; flex:1;}
+  .step-card{
+    background:#fff; border:1px solid var(--border); border-radius:12px;
+    box-shadow:var(--shadow);
+    margin-bottom:12px; cursor:pointer;
+    transition:border-color .15s ease, box-shadow .15s ease;
+  }
+  .step-card:hover{border-color:#C7CDD3;}
+  .step-card.active{border-color:var(--blue); box-shadow:0 1px 3px rgba(26,115,232,.18), 0 0 0 1px rgba(26,115,232,.15);}
+  .step-card button{
+    all:unset; display:flex; align-items:center; gap:14px;
+    width:100%; padding:14px 18px; cursor:pointer;
+  }
+  .step-num{
+    width:28px; height:28px; border-radius:50%; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:700; font-family:'Google Sans','Roboto',sans-serif;
+    background:var(--gray-fill); color:var(--muted);
+  }
+  .step-card.active .step-num{background:var(--blue); color:#fff;}
+  .step-card.done .step-num{background:#CFE8D8; color:var(--green-text);}
+  .step-label{font-size:14.5px; color:var(--body-text); line-height:1.35;}
+  .step-card.active .step-label{color:var(--ink); font-weight:500;}
+
+  .report-mistake{
+    display:flex; align-items:center; gap:8px;
+    font-size:13px; color:var(--muted); padding:14px 4px 4px 4px;
+    border-top:1px solid var(--border); margin-top:6px;
+  }
+  .report-mistake svg{width:16px; height:16px; opacity:.65;}
+
+  /* ---------- Main content ---------- */
+  .main{flex:1; min-width:0; padding:40px 40px 140px 20px; display:flex; justify-content:center;}
+  .content-col{width:100%; max-width:820px;}
+
+  .page-title{
+    font-size:38px; font-weight:400; color:var(--ink);
+    text-align:center; line-height:1.3; margin:8px 0 32px 0;
+    font-family:'Google Sans','Roboto',sans-serif;
+  }
+
+  .card{
+    background:#fff; border:1px solid var(--border); border-radius:16px;
+    box-shadow:var(--shadow); padding:40px; margin-bottom:24px;
+  }
+  .meta-row{display:flex; align-items:center; gap:12px; font-size:15px; color:var(--body-text); margin-bottom:14px;}
+  .meta-row:last-child{margin-bottom:0;}
+  .meta-row svg{width:19px; height:19px; opacity:.6; flex-shrink:0;}
+  .card h2.about-title{font-size:26px; font-weight:500; margin:0 0 22px 0; color:var(--ink);}
+
+  .step-heading{font-size:30px; font-weight:500; color:var(--ink); margin:0 0 20px 0;}
+  .card h3{font-size:18px; font-weight:500; margin:26px 0 10px 0; color:var(--ink);}
+  .card p{font-size:15.5px; line-height:1.75; color:var(--body-text); margin:0 0 16px 0;}
+  .card ul, .card ol{font-size:15.5px; line-height:1.8; color:var(--body-text); padding-left:22px; margin:0 0 16px 0;}
+  .card li{margin-bottom:6px;}
+  .card strong{color:var(--ink); font-weight:500;}
+  .card table{width:100%; border-collapse:collapse; margin:8px 0 20px 0; font-size:14.5px;}
+  .card table td{padding:10px 12px; border-bottom:1px solid var(--border); vertical-align:top;}
+
+  .callout{
+    border-radius:10px; padding:18px 22px; margin:18px 0 20px 0;
+    font-size:14.5px; line-height:1.7; border:1px solid;
+  }
+  .callout.tip{background:var(--green-bg); border-color:var(--green-border); color:var(--green-text);}
+  .callout.warn{background:var(--yellow-bg); border-color:var(--yellow-border); color:var(--yellow-text);}
+  .callout a{color:inherit; font-weight:600;}
+  .callout strong{color:inherit;}
+
+  .code-file{margin:18px 0 20px 0; border-radius:10px; overflow:hidden; background:var(--code-bg);}
+  .code-file-head{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:9px 14px; background:#272C38; font-size:12px; color:#9BA3B4;
+    font-family:'Roboto Mono',monospace;
+  }
+  .copy-btn{
+    all:unset; cursor:pointer; font-size:11.5px; color:#C7CED4;
+    padding:4px 10px; border-radius:6px; background:#333A47;
+    font-family:'Roboto',sans-serif;
+  }
+  .copy-btn:hover{background:#3F4756;}
+  .copy-btn.copied{background:#1E8E3E; color:#fff;}
+  .code-file pre{margin:0; padding:16px 18px; overflow-x:auto;}
+  .code-file code{color:var(--code-text); font-size:13px; line-height:1.6; white-space:pre;}
+
+  /* ---------- Floating nav buttons ---------- */
+  .float-nav{
+    position:fixed; bottom:26px; right:36px; display:flex; gap:12px; z-index:45;
+  }
+  .btn{
+    all:unset; cursor:pointer; font-family:'Google Sans','Roboto',sans-serif;
+    font-size:14.5px; font-weight:500; padding:12px 26px; border-radius:24px;
+    display:flex; align-items:center; gap:6px;
+  }
+  .btn.primary{background:var(--blue); color:#fff; box-shadow:0 2px 6px rgba(26,115,232,.35);}
+  .btn.primary:hover{background:var(--blue-dark);}
+  .btn.ghost{background:#fff; color:var(--body-text); border:1px solid var(--border);}
+  .btn.ghost:hover{border-color:#C7CDD3;}
+  .btn:disabled{opacity:0; pointer-events:none;}
+
+  @media (max-width:900px){
+    .sidebar{display:none;}
+    .main{padding:28px 20px 130px 20px;}
+    .page-title{font-size:28px;}
+    .card{padding:26px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-title">Membangun Asisten Chat Offline dengan Gemma di Android</div>
+  <div class="topbar-right">
+    <div class="lang-select">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+      <span>Bahasa Indonesia</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><path d="M6 9l6 6 6-6"/></svg>
+    </div>
+    <div class="avatar"></div>
+  </div>
+</div>
+
+<div class="shell">
+  <aside class="sidebar">
+    <ul class="steps-list" id="stepsNav"></ul>
+    <div class="report-mistake">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 21V4a1 1 0 0 1 1-1h10l-1 4h6l-2 6H9v8"/></svg>
+      Laporkan kesalahan
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="content-col" id="content"></div>
+  </main>
+</div>
+
+<div class="float-nav">
+  <button class="btn ghost" id="backBtn" onclick="goTo(current-1)">Kembali</button>
+  <button class="btn primary" id="nextBtn" onclick="goTo(current+1)">Lanjut</button>
+</div>
+
+<script>
+const ICON_DOC = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></svg>`;
+const ICON_PERSON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 20c1.5-4 5-5.5 7.5-5.5s6 1.5 7.5 5.5"/></svg>`;
+
+const STEPS = [
+{
+  id:"overview", name:"Ringkasan",
+  aboutCard:true,
+  heading:"1. Ringkasan",
+  body:`
+    <p>Codelab ini mendampingi workshop <strong>"Building an Offline Chat Assistant with Gemma"</strong>. Kamu akan membangun asisten chat yang bukan cuma menjawab teks &mdash; tapi bertindak sebagai <strong>agent dengan skill</strong>: bisa memutuskan sendiri kapan perlu cek jadwal atau catat note, lalu menjalankannya secara lokal lewat <strong>MediaPipe LLM Inference API</strong> &mdash; tanpa server, tanpa koneksi internet saat runtime.</p>
+
+    <h3>Yang akan kamu bangun</h3>
+    <p>Aplikasi chat Android yang bisa merespons "cek jadwalku hari ini" atau "catat: sharing di GDG Jakarta" dengan benar-benar menjalankan aksi tersebut secara lokal, 100% offline, tanpa mengirim satu byte pun percakapan ke luar perangkat.</p>
+
+    <h3>Yang akan kamu pelajari</h3>
+    <ul>
+      <li>Cara memuat model Gemma (format <code>.task</code> atau <code>.bin</code>, tergantung sumber download) ke aplikasi Android secara lokal</li>
+      <li>Cara membangun katalog skill (<code>check_schedule</code>, <code>save_note</code>, <code>list_notes</code>) yang bisa dipanggil agent</li>
+      <li>Cara membangun <strong>agent loop manual</strong> (routing pass + follow-up pass) karena MediaPipe belum punya native function calling</li>
+      <li>Cara membangun UI chat dengan Jetpack Compose yang menampilkan indikator saat agent menjalankan skill</li>
+      <li>Trade-off praktis: reliabilitas format prompt pada model kecil, latensi 2x panggilan model, dan kapan sebaiknya tetap pakai cloud API</li>
+    </ul>
+
+    <h3>Yang kamu butuhkan</h3>
+    <ul>
+      <li>Android Studio versi stabil terbaru</li>
+      <li>Device atau emulator API 26+, disarankan RAM &ge; 6GB</li>
+      <li>File model Gemma &mdash; <strong>pilih di Langkah 3 sesuai device kamu</strong>: HP kelas menengah/RAM terbatas &rarr; Gemma 3 1B (paling ringan); HP standar &rarr; Gemma 2 2B; HP kencang (RAM besar) &rarr; Gemma 3n E2B</li>
+      <li>Akun Google untuk menyetujui lisensi Gemma</li>
+    </ul>
+
+      `
+},
+{
+  id:"setup", name:"Setup project & dependency",
+  heading:"2. Setup project & dependency",
+  body:`
+    <div class="callout tip"><strong>Mulai dari sini — clone repo &amp; checkout branch starter:</strong>
+      <div class="code-file" style="margin-top:10px;">
+        <pre><code>git clone https://github.com/veroanggraa/GemmaChatWorkshop.git
+cd GemmaChatWorkshop
+git checkout codelab-starter</code></pre>
+      </div>
+      Empat branch tersedia:
+      <table style="margin-top:8px;">
+        <tr><td><code>codelab-starter</code></td><td>🏁 <strong>Titik mulai</strong> &mdash; project dengan <strong>5 TODO</strong> untuk diisi mengikuti Langkah 4&ndash;8 codelab ini</td></tr>
+        <tr><td><code>migrate-gemma3</code></td><td>✅ <strong>Solusi lengkap</strong> berjalan dengan Gemma 3 &mdash; <code>tasks-genai 0.10.27</code>, chat template &amp; sampling per-pass</td></tr>
+        <tr><td><code>try-qwen-tasks-genai-0.10.27</code></td><td>🧪 Eksperimen Qwen2.5 &mdash; bukti "swap the model, keep the loop"; eksplorasi setelah selesai</td></tr>
+        <tr><td><code>main</code></td><td>Versi awal (Gemma 2B, <code>tasks-genai 0.10.14</code>) &mdash; referensi historis</td></tr>
+      </table>
+      <strong>Macet di TODO mana pun?</strong> <code>git stash &amp;&amp; git checkout migrate-gemma3</code> untuk lihat solusinya, lalu <code>git checkout codelab-starter &amp;&amp; git stash pop</code> untuk lanjut kerja.
+    </div>
+
+    <p>Mau bangun dari nol? Buat project Android baru dengan template <strong>Empty Activity (Compose)</strong>. Untuk dependency, kita pakai <strong>Gradle Version Catalog</strong> (<code>libs.versions.toml</code>) supaya versi library terpusat di satu file &mdash; standar yang sekarang jadi default project baru di Android Studio.</p>
+
+    <h3>Tambahkan ke katalog versi</h3>
+    <p>Buka (atau buat) <code>gradle/libs.versions.toml</code> di root project, lalu tambahkan entri berikut.</p>
+    <div class="code-file">
+      <div class="code-file-head"><span>gradle/libs.versions.toml</span><button class="copy-btn" onclick="copyCode(this)">Salin</button></div>
+      <pre><code>[versions]
+coreKtx = "1.13.1"
+activityCompose = "1.9.0"
+composeBom = "2024.06.00"
+lifecycleViewmodelCompose = "2.8.2"
+mediapipeGenai = "0.10.14"
+kotlinxCoroutines = "1.8.1"
+
+[libraries]
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
+androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
+androidx-lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycleViewmodelCompose" }
+
+# Inference Gemma on-device
+mediapipe-tasks-genai = { group = "com.google.mediapipe", name = "tasks-genai", version.ref = "mediapipeGenai" }
+
+# Coroutine untuk load model & generate response di background
+kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }</code></pre>
+    </div>
+
+    <h3>Rujuk dari build.gradle.kts</h3>
+    <p>Sekarang <code>app/build.gradle.kts</code> cukup memanggil alias dari katalog &mdash; tidak ada lagi string versi yang di-hardcode di sini.</p>
+    <div class="code-file">
+      <div class="code-file-head"><span>app/build.gradle.kts</span><button class="copy-btn" onclick="copyCode(this)">Salin</button></div>
+      <pre><code>dependencies {
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.activity.compose)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+
+    // Inference Gemma on-device
+    implementation(libs.mediapipe.tasks.genai)
+
+    // Coroutine untuk load model & generate response di background
+    implementation(libs.kotlinx.coroutines.android)
+}</code></pre>
+    </div>
+
+    <p>Set juga <code>minSdk = 26</code> di blok <code>defaultConfig</code>.</p>
+
+    <div class="callout warn"><strong>Perhatian:</strong> native library dari MediaPipe kadang memicu error "duplicate file" saat packaging. Tambahkan ini di blok <code>android { }</code>:
+      <div class="code-file" style="margin-top:10px;">
+        <pre><code>packaging {
+    resources.excludes.add("META-INF/*")
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="callout tip">Kalau Android Studio membuat project baru untukmu, biasanya <code>gradle/libs.versions.toml</code> sudah otomatis ada dengan beberapa entri AndroidX/Compose default &mdash; tinggal tambahkan baris <code>mediapipe-tasks-genai</code> dan <code>kotlinx-coroutines-android</code> di atas.</div>
+  `
+},
+{
+  id:"model", name:"Pilih & siapkan model",
+  heading:"3. Pilih model Gemma kamu",
+  body:`
+    <p>Model tidak dibundel di dalam APK karena ukurannya besar dan tunduk pada lisensi Gemma. App di codelab ini <strong>mendeteksi format model secara otomatis</strong> (lewat magic bytes, bukan nama file), jadi <strong>Gemma 2 dan Gemma 3 sama-sama jalan tanpa mengubah satu baris kode pun</strong> &mdash; pilih sesuai device kamu.</p>
+
+    <table>
+      <tr><td><strong>Trek</strong></td><td><strong>Model &amp; sumber</strong></td><td><strong>Ukuran</strong></td><td><strong>Cocok untuk</strong></td></tr>
+      <tr><td>🟢 <strong>Gemma 2</strong> (paling teruji)</td><td><code>gemma-2b-it-cpu-int4.bin</code> &mdash; Kaggle &rarr; Gemma &rarr; tab <strong>LiteRT</strong> &mdash; branch <code>main</code></td><td>~1.35 GB</td><td>Alternatif paling teruji; kompatibilitas paling luas</td></tr>
+      <tr><td>🔵 <strong>Gemma 3</strong> (dipakai di demo)</td><td><code>gemma3-1b-it-int4.task</code> &mdash; Hugging Face &rarr; <strong>litert-community/Gemma3-1B-IT</strong> &mdash; branch <code>migrate-gemma3</code></td><td>~529 MB</td><td><strong>Default workshop</strong> &mdash; paling ringan, jalan di hampir semua HP</td></tr>
+      <tr><td>🔵 <strong>Gemma 3n E2B</strong> (advanced)</td><td><code>gemma-3n-E2B-it-int4.task</code> &mdash; Hugging Face &rarr; <strong>google/gemma-3n-E2B-it-litert-preview</strong></td><td>~3.1 GB</td><td>Device kencang (butuh ~6 GB RAM saat load); mendukung input gambar</td></tr>
+      <tr><td>🟣 <strong>Gemma 4</strong> (bonus track)</td><td>Lewat <strong>AICore Developer Preview + ML Kit Prompt API</strong> &mdash; jalur API berbeda, lihat langkah bonus di akhir codelab</td><td>&mdash;</td><td>Device ber-AICore; bukan jalur MediaPipe</td></tr>
+    </table>
+
+    <div class="callout tip"><strong>Bingung pilih?</strong> Ambil trek 🔵 <strong>Gemma 3 1B</strong> &mdash; itu yang dipakai di demo (branch <code>migrate-gemma3</code> adalah solusi lengkapnya), paling ringan, dan jalan di hampir semua HP. Trek 🟢 Gemma 2 tetap valid sebagai alternatif yang paling teruji. <strong>Catatan branch:</strong> <code>try-qwen-tasks-genai-0.10.27</code> bahkan membuktikan loop yang sama jalan dengan Qwen2.5 &mdash; arsitekturnya tidak menikah dengan satu model.</div>
+
+    <h3>Trek 🟢 Gemma 2 — download</h3>
+    <ol>
+      <li>Buka <strong>Kaggle Models &rarr; Gemma</strong>, klik tab <strong>"LiteRT (formerly TFLite)"</strong></li>
+      <li>Pilih variation <code>gemma-2b-it-cpu-int4</code> (instruction-tuned, CPU, int4)</li>
+      <li>Setujui lisensi Gemma, lalu download file <code>.bin</code>-nya (~1.35 GB)</li>
+    </ol>
+
+    <h3>Trek 🔵 Gemma 3 — download (branch <code>migrate-gemma3</code>)</h3>
+    <ol>
+      <li>Login ke <strong>huggingface.co</strong>, buka <strong>litert-community/Gemma3-1B-IT</strong></li>
+      <li>Setujui lisensi Gemma di banner atas &mdash; <strong>wajib</strong>, repo-nya <em>gated</em>. Tanpa ini unduhan gagal dengan error <code>401 GatedRepo</code></li>
+      <li>Tab <strong>Files</strong> &rarr; unduh <code>gemma3-1b-it-int4.task</code> (~529 MB) &mdash; ambil yang <code>int4.task</code> <strong>biasa</strong>: varian berakhiran <code>.litertlm</code> itu untuk stack LiteRT-LM (bukan yang dipakai app ini), dan varian seperti <code>_ekv1280_sm8750</code> dikunci ke context length &amp; chipset tertentu</li>
+      <li>Jangan lupa <code>git checkout migrate-gemma3</code> di project &mdash; branch ini memakai <code>tasks-genai 0.10.27</code> plus chat template &amp; sampling terpisah untuk routing vs balasan</li>
+    </ol>
+    <p>Untuk varian <strong>Gemma 3n E2B</strong> (advanced, ~3.1 GB): repo <strong>google/gemma-3n-E2B-it-litert-preview</strong>, file <code>.task</code> int4 &mdash; pakai branch <code>migrate-gemma3</code> juga.</p>
+
+    <h3>Push ke device (semua trek MediaPipe)</h3>
+    <p>Nama file <strong>tidak perlu diganti</strong> &mdash; app memindai folder dan mengenali formatnya sendiri.</p>
+    <div class="code-file">
+      <div class="code-file-head"><span>terminal</span><button class="copy-btn" onclick="copyCode(this)">Salin</button></div>
+      <pre><code>adb shell mkdir -p /data/local/tmp/llm
+adb push nama-file-model-kamu /data/local/tmp/llm/</code></pre>
+    </div>
+
+    <div class="callout warn"><strong>Kalau app bilang "folder kosong atau tidak terbaca":</strong> cek dulu file benar-benar ada (<code>adb shell ls -la /data/local/tmp/llm/</code>), lalu perbaiki permission kalau perlu:
+      <div class="code-file" style="margin-top:10px;">
+        <pre><code>adb shell chmod 755 /data/local/tmp/llm
+adb shell chmod 644 /data/local/tmp/llm/nama-file-model-kamu</code></pre>
+      </div>
+    </div>
+
+    <div class="callout tip">Transfer file berukuran GB lewat adb bisa memakan waktu &mdash; siapkan lebih awal. Satu folder cukup berisi <strong>satu</strong> file model saja supaya hasil deteksinya tidak ambigu.</div>
+  `
+},
+{
+  id:"datamodel", name:"Model data chat",
+  heading:"4. Model data chat",
+  body:`
+    <div class="callout tip"><strong>Format latihan:</strong> di branch <code>codelab-starter</code>, Langkah 4&ndash;8 berikut sudah ditandai sebagai <strong>TODO 1&ndash;5</strong> di dalam kode. Cari dengan <code>TODO(</code> di Android Studio (⌘⇧F / Ctrl+Shift+F), isi sesuai penjelasan tiap langkah, dan bandingkan dengan branch <code>migrate-gemma3</code> kalau ragu.</div>
+
+    <p>Sebelum masuk ke logika AI, siapkan dulu representasi sederhana untuk satu pesan di layar chat.</p>
+    <div class="code-file">
+      <div class="code-file-head"><span>ChatMessage.kt</span><button class="copy-btn" onclick="copyCode(this)">Salin</button></div>
+      <pre><code>package com.example.gemmachat
+
+data class ChatMessage(
+    val text: String,
+    val isFromUser: Boolean
+)</code></pre>
+    </div>
+    <p><code>isFromUser</code> menentukan posisi dan warna bubble di UI.</p>
+  `
+},
+{
+  id:"load", name:"Muat model Gemma",
+  heading:"5. Muat model Gemma",
+  body:`
+    <p>Buat <code>ChatViewModel</code> yang bertanggung jawab memuat model saat aplikasi dibuka.</p>
+    <div class="code-file">
+      <div class="code-file-head"><span>ChatViewModel.kt &mdash; bagian 1</span><button class="copy-btn" onclick="copyCode(this)">Salin</button></div>
+      <pre><code>class ChatViewModel(application: Application) : AndroidViewModel(application) {
+
+    private val modelDir = "/data/local/tmp/llm/"
+    private var llmInference: LlmInference? = null
+
+    private val _messages = MutableStateFlow&lt;List&lt;ChatMessage&gt;&gt;(emptyList())
+    val messages: StateFlow&lt;List&lt;ChatMessage&gt;&gt; = _messages
+
+    private val _isModelReady = MutableStateFlow(false)
+    val isModelReady: StateFlow&lt;Boolean&gt; = _isModelReady
+
+    init {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                // Nama & ekstensi file model dari Kaggle bisa berbeda-beda (.task
+                // atau .bin) — auto-detect saja, daripada hardcode satu nama/ekstensi.
+                val dir = File(modelDir)
+                val modelFile = dir.listFiles()?.firstOrNull {
+                    it.name.endsWith(".task") || it.name.endsWith(".bin")
+                }
+                checkNotNull(modelFile) {
+                    "Tidak ada file .task/.bin ditemukan di $modelDir (folder kosong atau tidak terbaca)"
+                }
+
+                val options = LlmInferenceOptions.builder()
+                    .setModelPath(modelFile.absolutePath)
+                    .setMaxTokens(512)
+                    .setTopK(40)
+                    .setTemperature(0.7f)
+                    .build()
+
+                llmInference = LlmInference.createFromOptions(getApplication(), options)
+                _isModelReady.value = true
+            } catch (e: Exception) {
+                _messages.value = _messages.value + ChatMessage(
+                    text = "Gagal memuat model: ${'$'}{e.message}",
+                    isFromUser = false
+                )
+            }
+        }
+    }
+}</code></pre>
+    </div>
+    <div class="callout tip">Loading model butuh waktu &mdash; selalu tampilkan status loading di UI, jangan biarkan pengguna mengira aplikasi hang.</div>
+  `
+},
+{
+  id:"skills", name:"Definisikan skill",
+  heading:"6. Definisikan skill agent",
+  body:`
+    <p>Sebelum bikin logika agent-nya, siapkan dulu <strong>katalog skill</strong> &mdash; hal-hal konkret yang bisa dilakukan asisten ini selain sekadar ngobrol: cek jadwal, dan catat/lihat note.</p>
+
+    <div class="code-file">
+      <div class="code-file-head"><span>Skills.kt</span><button class="copy-btn" onclick="copyCode(this)">Salin</button></div>
+      <pre><code>object SkillRegistry {
+
+    private val schedule = listOf(
+        "09:00 - Daily standup",
+        "11:00 - Review desain UI",
+        "14:00 - Workshop Gemma di Google Indonesia",
+        "16:30 - Sync sama tim backend"
+    )
+
+    private val notes = mutableListOf&lt;String&gt;()
+
+    val catalogDescription = """
+        - check_schedule() -> lihat agenda hari ini
+        - save_note(text) -> simpan catatan baru
+        - list_notes() -> lihat semua catatan yang sudah disimpan
+    """.trimIndent()
+
+    fun execute(skillName: String, rawArgs: String): String {
+        return when (skillName.trim()) {
+            "check_schedule" -> schedule.joinToString("\\n")
+            "save_note" -> {
+                val text = rawArgs.trim().trim('"')
+                if (text.isBlank()) "Gagal: teks catatan kosong."
+                else { notes.add(text); "Catatan berhasil disimpan: \\"$text\\"" }
+            }
+            "list_notes" ->
+                if (notes.isEmpty()) "Belum ada catatan yang tersimpan."
+                else notes.mapIndexed { i, n -> "${'$'}{i + 1}. $n" }.joinToString("\\n")
+            else -> "Skill '$skillName' tidak dikenali."
+        }
+    }
+}</code></pre>
+    </div>
+
+    <div class="callout tip">Data di sini sengaja <strong>mock &amp; in-memory</strong> (jadwal hardcoded, note hilang saat app restart). Integrasi ke <code>CalendarContract</code> API atau penyimpanan persisten (DataStore/Room) cocok jadi "tantangan lanjutan untuk kamu".</div>
+  `
+},
+{
+  id:"agentloop", name:"Agent loop (routing + follow-up)",
+  heading:"7. Bangun agent loop",
+  body:`
+    <p>Ini bagian intinya: MediaPipe LLM Inference API <strong>belum punya native function calling</strong>, jadi kita bangun pola manual mirip ReAct &mdash; ditegakkan murni lewat prompt, bukan API resmi.</p>
+
+    <h3>Alurnya</h3>
+    <ol>
+      <li><strong>Routing pass</strong> &mdash; model diberi tahu daftar skill, diminta balas dengan format baku <code>ACTION: nama_skill(argumen)</code> kalau perlu skill, atau jawaban langsung kalau tidak.</li>
+      <li>Kalau balasan cocok pola <code>ACTION: ...</code>, app menjalankan skill itu secara lokal.</li>
+      <li><strong>Follow-up pass</strong> &mdash; hasil mentah skill dikirim balik ke model supaya disusun jadi jawaban natural.</li>
+    </ol>
+
+    <div class="code-file">
+      <div class="code-file-head"><span>ChatViewModel.kt &mdash; agent loop</span><button class="copy-btn" onclick="copyCode(this)">Salin</button></div>
+      <pre><code>private val actionRegex = Regex("""ACTION:\\s*(\\w+)\\((.*)\\)""", RegexOption.DOT_MATCHES_ALL)
+
+fun sendMessage(userText: String) {
+    if (userText.isBlank() || _isGenerating.value) return
+
+    _messages.value = _messages.value + ChatMessage(userText, isFromUser = true)
+    _isGenerating.value = true
+
+    viewModelScope.launch(Dispatchers.IO) {
+        val routingPrompt = buildAgentPrompt(userText)
+        val firstPass = (llmInference?.generateResponse(routingPrompt) ?: "Model belum siap.").trim()
+
+        val match = actionRegex.find(firstPass)
+
+        val finalReply: String = if (match != null) {
+            val skillName = match.groupValues[1]
+            val rawArgs = match.groupValues[2]
+
+            withContext(Dispatchers.Main) {
+                _messages.value = _messages.value + ChatMessage(
+                    text = "🔧 Menjalankan skill: $skillName",
+                    isFromUser = false,
+                    isSystemAction = true
+                )
+            }
+
+            val skillResult = SkillRegistry.execute(skillName, rawArgs)
+            llmInference?.generateResponse(buildFollowUpPrompt(userText, skillName, skillResult))
+                ?: skillResult
+        } else {
+            firstPass
+        }
+
+        withContext(Dispatchers.Main) {
+            _messages.value = _messages.value + ChatMessage(finalReply, isFromUser = false)
+            _isGenerating.value = false
+        }
+    }
+}
+
+private fun buildAgentPrompt(userText: String): String = """
+    Kamu adalah asisten chat yang bisa menjalankan skill berikut kalau dibutuhkan:
+    ${'$'}{SkillRegistry.catalogDescription}
+
+    Format WAJIB:
+    - Jika perlu menjalankan skill, balas HANYA dengan satu baris:
+      ACTION: nama_skill(argumen)
+    - Jika tidak perlu skill, balas langsung ke pengguna dalam 1-3 kalimat, Bahasa Indonesia santai.
+
+    Pesan pengguna: $userText
+""".trimIndent()
+
+private fun buildFollowUpPrompt(userText: String, skillName: String, skillResult: String): String = """
+    Pengguna bertanya: "$userText"
+    Kamu menjalankan skill "$skillName" dan hasilnya:
+    $skillResult
+
+    Susun balasan natural ke pengguna berdasarkan hasil ini, dalam Bahasa Indonesia santai, 1-4 kalimat.
+""".trimIndent()</code></pre>
+    </div>
+
+    <div class="callout warn"><strong>Penting:</strong> karena format <code>ACTION: ...</code> cuma konvensi prompt (bukan API resmi), model kecil terkuantisasi tidak selalu 100% konsisten mengikutinya. Regex parsing di atas sengaja dibuat sederhana &amp; toleran. Setiap turn yang memanggil skill juga otomatis 2x lebih lambat karena butuh 2 kali panggilan model.</div>
+  `
+},
+{
+  id:"ui", name:"UI chat & indikator skill",
+  heading:"8. UI chat & indikator skill",
+  body:`
+    <p>Hubungkan <code>ChatViewModel</code> ke tampilan, dan tambahkan bubble kecil yang menandakan agent sedang menjalankan skill &mdash; supaya audiens bisa <em>lihat</em> agent-nya "bertindak", bukan cuma "ngobrol".</p>
+
+    <div class="code-file">
+      <div class="code-file-head"><span>MainActivity.kt &mdash; ChatBubble()</span><button class="copy-btn" onclick="copyCode(this)">Salin</button></div>
+      <pre><code>@Composable
+fun ChatBubble(message: ChatMessage) {
+    if (message.isSystemAction) {
+        Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+            Surface(color = Color(0xFFEDE7F6), shape = MaterialTheme.shapes.extraLarge) {
+                Text(
+                    text = message.text,
+                    fontSize = 12.sp,
+                    color = Color(0xFF5E35B1),
+                    modifier = Modifier.padding(horizontal = 14.dp, vertical = 6.dp)
+                )
+            }
+        }
+        return
+    }
+
+    val bubbleColor = if (message.isFromUser) Color(0xFFDCF8C6) else Color(0xFFF1F0F0)
+    val alignment = if (message.isFromUser) Alignment.CenterEnd else Alignment.CenterStart
+
+    Box(modifier = Modifier.fillMaxWidth(), contentAlignment = alignment) {
+        Surface(color = bubbleColor, shape = MaterialTheme.shapes.medium) {
+            Text(
+                text = message.text.ifBlank { "…" },
+                modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)
+            )
+        }
+    }
+}</code></pre>
+    </div>
+
+    <div class="callout tip"><strong>Checkpoint:</strong> jalankan aplikasi, coba ketik "cek jadwalku hari ini" lalu "catat: sharing di GDG Jakarta" &mdash; keduanya harus jalan tanpa internet sama sekali.</div>
+  `
+},
+{
+  id:"tuning", name:"Tuning & trade-off",
+  heading:"9. Tuning & trade-off",
+  body:`
+    <p>Beberapa trade-off yang menentukan pengalaman pengguna di device nyata.</p>
+    <table>
+      <tr><td><strong>Ukuran model (2B vs 4B)</strong></td><td>Lebih besar &rarr; jawaban lebih baik, tapi lebih lambat & butuh RAM lebih besar</td></tr>
+      <tr><td><strong>Kuantisasi (int4 vs int8)</strong></td><td>int4 lebih kecil & cepat, sedikit mengorbankan kualitas jawaban</td></tr>
+      <tr><td><strong>Cold start</strong></td><td>Waktu load model saat <code>init{}</code> bisa terasa &mdash; tampilkan status loading</td></tr>
+      <tr><td><strong>Panjang konteks</strong></td><td>Riwayat chat panjang memperlambat generate & menghabiskan token budget</td></tr>
+    </table>
+    <div class="callout tip"><strong>Kapan tetap pakai cloud API?</strong> Untuk konteks sangat panjang atau akurasi tinggi, cloud API masih lebih cocok. On-device unggul di privasi, offline-first, dan latensi rendah.</div>
+
+    <div class="callout tip"><strong>Ke mana arahnya?</strong> Gemma 4 (dirilis April 2026) sudah punya <em>native tool-calling support</em> &mdash; pola <code>ACTION: ...</code> manual yang baru saja kamu bangun bisa jadi digantikan native function calling di masa depan. Google juga mendorong <strong>ML Kit GenAI Prompt API + AICore</strong> sebagai jalur baru untuk on-device inference. Workshop ini sengaja tetap pakai MediaPipe + Gemma 2B karena jalan di dalam app sendiri (tidak tergantung dukungan AICore di device tertentu) dan lebih matang untuk demo hari ini &mdash; tapi konsep agent+skill yang kamu pelajari tetap relevan ke arah itu.</div>
+  `
+},
+{
+  id:"troubleshoot", name:"Troubleshooting",
+  heading:"10. Troubleshooting",
+  body:`
+    <h3>Model gagal dimuat</h3>
+    <ul>
+      <li>Cek ulang path di <code>modelPath</code></li>
+      <li>Pastikan device punya cukup ruang & RAM</li>
+    </ul>
+    <h3>Error "duplicate file" saat build</h3>
+    <ul><li>Tambahkan <code>packaging { resources.excludes.add("META-INF/*") }</code></li></ul>
+    <h3>Aplikasi terasa lambat</h3>
+    <ul>
+      <li>Coba varian model lebih kecil / kuantisasi lebih agresif</li>
+      <li>Pastikan generate dijalankan di <code>Dispatchers.IO</code></li>
+    </ul>
+    <div class="callout warn">Selalu tes di device fisik sebelum demo penting &mdash; performa emulator sering tidak mewakili device asli.</div>
+  `
+},
+{
+  id:"gemma4", name:"Bonus: Gemma 4 via ML Kit",
+  heading:"11. Bonus track — Gemma 4 on-device via ML Kit",
+  body:`
+    <p><strong>Gemma 4 tidak lewat jalur MediaPipe</strong> yang kita pakai di codelab ini &mdash; jalur resminya on-device adalah <strong>AICore Developer Preview + ML Kit GenAI Prompt API</strong>. Model tidak di-push manual: AICore yang mengelola download &amp; update-nya di device.</p>
+
+    <h3>Prasyarat (beda dari trek MediaPipe)</h3>
+    <ul>
+      <li>Device dengan dukungan <strong>AICore</strong> (flagship generasi terbaru; device lain fallback CPU yang tidak merepresentasikan performa final)</li>
+      <li>Opt-in ke <strong>AICore Developer Preview</strong> di developers.google.com/ml-kit/genai/aicore-dev-preview</li>
+      <li>Tidak punya device AICore? Coba modelnya lewat app <strong>Google AI Edge Gallery</strong> (Play Store) tanpa menulis kode</li>
+    </ul>
+
+    <h3>Kode inti</h3>
+    <p>Perhatikan betapa berbedanya dengan MediaPipe: tidak ada path file model, tidak ada adb push &mdash; cukup pilih release track &amp; preferensi ukuran (E2B cepat / E4B reasoning lebih dalam).</p>
+    <div class="code-file">
+      <div class="code-file-head"><span>Gemma4Engine.kt &mdash; ML Kit Prompt API</span><button class="copy-btn" onclick="copyCode(this)">Salin</button></div>
+      <pre><code>// Konfigurasi: target model preview (Gemma 4)
+val previewConfig = generationConfig {
+    modelConfig = ModelConfig {
+        releaseTrack = ModelReleaseTrack.PREVIEW
+        preference = ModelPreference.FULL   // E4B; pakai FAST untuk E2B (3x lebih cepat)
+    }
+}
+
+val model = GenerativeModel.getClient(previewConfig)
+
+// Selalu cek ketersediaan dulu — model diunduh & dikelola AICore, bukan kamu
+if (model.checkStatus() == FeatureStatus.AVAILABLE) {
+    val response = model.generateContent(prompt)
+} else {
+    // Device belum AICore-ready / model belum terunduh — tampilkan pesan ramah
+}</code></pre>
+    </div>
+
+    <h3>Kenapa ini menarik untuk arsitektur agent kita</h3>
+    <ul>
+      <li>Gemma 4 punya <strong>native tool calling</strong> &mdash; dan selama preview, dukungan tool calling, structured output, system prompt, &amp; thinking mode dijanjikan hadir di Prompt API. Protokol <code>ACTION:</code> manual yang kamu bangun di codelab ini nantinya bisa digantikan API resmi.</li>
+      <li>Kode yang ditulis untuk Gemma 4 hari ini <strong>otomatis jalan di Gemini Nano 4</strong> pada device flagship yang rilis akhir tahun &mdash; hingga 4x lebih cepat, 60% lebih hemat baterai.</li>
+    </ul>
+
+    <div class="callout warn"><strong>Status: Developer Preview.</strong> API bisa berubah, dukungan device terbatas, dan performa CPU fallback bukan gambaran final. Cocok untuk eksplorasi setelah workshop &mdash; bukan pengganti trek MediaPipe untuk demo hari ini.</div>
+  `
+},
+{
+  id:"done", name:"Selesai",
+  heading:"12. Selesai",
+  body:`
+    <p>Kamu baru saja membangun aplikasi Android yang menjalankan model bahasa langsung di perangkat, tanpa server dan tanpa koneksi internet.</p>
+    <h3>Tantangan lanjutan (opsional)</h3>
+    <ul>
+      <li>Upgrade follow-up pass ke <code>generateResponseAsync()</code> supaya balasan terasa "mengetik" (streaming)</li>
+      <li>Tambah skill baru, misalnya <code>delete_note(index)</code> atau <code>set_reminder(text, time)</code></li>
+      <li>Ganti <code>schedule</code> mock dengan data asli dari <code>CalendarContract</code> API</li>
+      <li>Persisten-kan notes lewat DataStore/Room supaya tidak hilang saat app di-restart</li>
+      <li>Coba model non-Gemma &mdash; branch <code>try-qwen-tasks-genai-0.10.27</code> di repo menyimpan riwayat lengkap eksperimen Qwen (chat template + tuning sampling): bukti nyata "swap the model file, keep the loop"</li>
+      <li>Kirim ulang riwayat percakapan agar Gemma "ingat" konteks antar-turn</li>
+      <li>Jelajahi branch <code>try-qwen-tasks-genai-0.10.27</code> &mdash; ganti model ke Qwen2.5 dan lihat apa saja yang perlu (dan tidak perlu) berubah</li>
+    </ul>
+    <div class="callout tip">Selamat, codelab selesai! Fondasi ini bisa dikembangkan ke banyak use case lain: ringkasan catatan, moderasi konten, hingga asisten produktivitas.</div>
+  `
+}
+];
+
+let current = 0;
+
+function renderNav(){
+  const nav = document.getElementById('stepsNav');
+  nav.innerHTML = STEPS.map((s,i)=>`
+    <li class="step-card ${i===current?'active':''} ${i<current?'done':''}">
+      <button onclick="goTo(${i})">
+        <span class="step-num">${i+1}</span>
+        <span class="step-label">${s.name}</span>
+      </button>
+    </li>`).join('');
+}
+
+function renderContent(){
+  const el = document.getElementById('content');
+  const s = STEPS[current];
+  let html = `<h1 class="page-title">Membangun Asisten Chat Offline dengan Gemma di Android</h1>`;
+
+  if(s.aboutCard){
+    html += `
+    <div class="card">
+      <h2 class="about-title">Tentang codelab ini</h2>
+      <div class="meta-row">${ICON_DOC}<span>Terakhir diperbarui 23 Jul 2026</span></div>
+      <div class="meta-row">${ICON_PERSON}<span>Ditulis untuk workshop GDG Jakarta</span></div>
+    </div>`;
+  }
+
+  html += `<div class="card"><h1 class="step-heading">${s.heading}</h1>${s.body}</div>`;
+  el.innerHTML = html;
+
+  document.getElementById('backBtn').disabled = current===0;
+  document.getElementById('nextBtn').textContent = current===STEPS.length-1 ? 'Selesai' : 'Lanjut';
+  document.getElementById('nextBtn').disabled = current===STEPS.length-1;
+}
+
+function goTo(i){
+  if(i<0 || i>=STEPS.length) return;
+  current = i;
+  renderNav();
+  renderContent();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function copyCode(btn){
+  const codeEl = btn.closest('.code-file').querySelector('code');
+  navigator.clipboard.writeText(codeEl.innerText).then(()=>{
+    const original = btn.textContent;
+    btn.textContent = 'Tersalin';
+    btn.classList.add('copied');
+    setTimeout(()=>{ btn.textContent = original; btn.classList.remove('copied'); }, 1500);
+  });
+}
+
+renderNav();
+renderContent();
+</script>
+</body>
+</html>
